@@ -1,8 +1,9 @@
 name: REAL_FORKED_Bioinfo_project
 channels:
-  - defaults
+   - conda-forge
+   - defaults
 dependencies:
-  - python==3.10.17
+  - python=3.10
   - ipykernel
   - pip
   - anndata
@@ -12,4 +13,4 @@ dependencies:
   - matplotlib
   - scanpy
   - pandas
-prefix: C:\Users\kalin_p\miniconda3\envs\REAL_FORKED_Bioinfo_project
+
