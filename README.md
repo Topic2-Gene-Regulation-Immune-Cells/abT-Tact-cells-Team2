@@ -36,3 +36,6 @@ The goal is to transform the raw ATAC-seq signal matrix into a tidy format and t
 - **Final output:** `refined_ATAC.csv`  
 - This tidy-format file will be used for variability analysis in the next step. 
 
+---
+
+
