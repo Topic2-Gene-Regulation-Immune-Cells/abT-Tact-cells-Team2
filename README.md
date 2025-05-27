@@ -77,10 +77,10 @@ Performed basic descriptive statistics to assess the distribution and variabilit
     }
 
     .dataframe thead th {
-        text-align: right;
+        text-align: middle;
     }
 </style>
-<table border="1" class="dataframe">
+<table border="1" class="dataframe" style="margin-left: auto; margin-right: auto;">
   <thead>
     <tr style="text-align: right;">
       <th></th>
@@ -328,17 +328,18 @@ Performed basic descriptive statistics to assess the distribution and variabilit
 </table>
 </div>
 
+
 Globally speaking, there is not much of a difference between the cell types. The values are almost identical, which leads us to a possible conclusion that minimal changes in chromatin accessibility (i.e. individual enhancers) may be what differentiates the cell types. 
 
-![Per-Sample Mean in ATAC-seq Signal](image.png)
+![Per-Sample Mean in ATAC-seq Signal](plots/image.png)
 
 **Fig. 1: Mean values of ATAC-seq peak signal in progenitor, abT and T-act cells.** The values of the mean signal in all cell types lie around 4.0. Little difference between the cell types can be observed.
 
-![Per-Sample Median in ATAC-seq Signal](image-1.png)
+![Per-Sample Median in ATAC-seq Signal](plots/image-1.png)
 
 **Fig. 2: Median values of ATAC-seq peak signal in progenitor, abT, and T.act cells.** The median values for all cell types are fairly low and lie between 0.4 and a little over 1.6.
 
-![Per-Sample CV of ATAC-seq signal](image-2.png)
+![Per-Sample CV of ATAC-seq signal](plots/image-2.png)
 
 **Fig. 3: Coefficient of variance (CV) values of ATAC-seq peak signals in progenitor, abT, and T.act cells.** The CVs of all cell types are quite similar with a value of around 2.5.
 
