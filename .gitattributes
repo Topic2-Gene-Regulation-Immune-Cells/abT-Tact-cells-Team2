@@ -3,3 +3,4 @@ track filter=lfs diff=lfs merge=lfs -text
 *.csv filter=lfs diff=lfs merge=lfs -text
 git filter=lfs diff=lfs merge=lfs -text
 ATAC-seq[[:space:]]data.csv filter=lfs diff=lfs merge=lfs -text
+refined_ATAC.csv filter=lfs diff=lfs merge=lfs -text
