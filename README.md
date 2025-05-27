@@ -1,19 +1,39 @@
-# abT-Tact-cells-Team2
-This is a repository for the current team that the students will work on &amp; submit.
+# ATAC-seq Signal Processing 
 
+This part of the project focuses on:
+- Wrangling ATAC-seq signal data 
+- Analyzing signal variability across samples 
 
-Dear Team2, 
+The goal is to transform the raw ATAC-seq signal matrix into a tidy format and then assess per-sample variability (mean, median, standard deviation, CV).
 
-you can use this ReadMe file to construct your project, summarise ideas, and present results. 
+- This work is being done in the `ATAC-seq-wrangling` branch.
 
-The project guideline and requirements were kindly summarised by Alexander [here](https://github.com/maiwen-ch/2025_Data_Analysis_Topic_02_Gene_Regulation_of_Immune_Cells). Please read through this repo very carefully and start gathering your own ideas!
+---
 
-You will have to submit a Jupyter Notebook with your code & plotting/results, so make sure we can find it in this repository at the end. 
+## Part 1 – ATAC-seq Wrangling 
 
-Also, do not forget to clean up this ReadMe and edit it, so that any external member of the course could read & comprehend what you did in your project. 
+### Input
+- **Folder:** `ATAC-seq/`
+- Contains all raw and intermediate ATAC-seq files used for wrangling: 
 
-Good luck! 
+- `ATAC-seq data.csv`: Original wide-format signal matrix (rows = peaks, columns = all samples). Not modified to avoid accidental deletion.
+- `filtered_ATAC_abT_Tact_Stem.csv`: Subset of the original matrix, keeping only columns related to abT and T.act cell types.
+- `refined_ATAC.csv`: Tidy-format table with selected samples and peaks reshaped into three columns: `peakID`, `SampleID`, and `Signal`.
 
-Test test gus
-Test test bob
-Test test kal
+### Method
+1. **Filter for abT and T.act samples**
+   - File used: `filtered_ATAC_abT_Tact_Stem.csv`
+   - Only keeps columns corresponding to abT and T.act cell types.
+
+2. **Refine and reshape**
+   - File: `refined_ATAC.csv`
+   - Reformats the data to include:
+     - `peakID`
+     - `SampleID`
+     - `Signal`
+   - Puts sample type (abT or T.act) and signal values into two columns (long format).
+
+### Output
+- **Final output:** `refined_ATAC.csv`  
+- This tidy-format file will be used for variability analysis in the next step. 
+
