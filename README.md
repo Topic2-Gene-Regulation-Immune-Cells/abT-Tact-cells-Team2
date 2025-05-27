@@ -38,4 +38,45 @@ The goal is to transform the raw ATAC-seq signal matrix into a tidy format and t
 
 ---
 
+---
+
+## Part 2 – Signal Variability Analysis 
+
+### Input
+- **File:** `refined_ATAC.csv`  
+  - Output from Part 1's wrangling step, containing tidy ATAC-seq signal values.
+
+### Method
+1. **Library Imports:**
+   - Used `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scanpy` for analysis and visualization.
+
+2. **Data Loading:**
+   - Loaded `refined_ATAC.csv` as a DataFrame for downstream analysis.
+
+3. **Descriptive Statistics:**
+
+Performed basic descriptive statistics to assess the distribution and variability of chromatin accessibility signals across all 29 samples (cell types). The minimum and maximum signal values in the dataset were found to be:
+
+- **Min Signal:** 0.1  
+- **Max Signal:** 727.42  
+
+   - Computed per-sample statistics for the `Signal` column:
+     - **Mean**
+     - **Median**
+     - **Standard Deviation (SD)**
+     - **Coefficient of Variation (CV)** (calculated as `SD / Mean`)
+     
+
+
+
+
+
+
+- **Plots:**
+  - `cv_distribution_density.png`: Overlaid density plot of CV for `abT` and `T.act`
+  - `cv_boxplot.png`: Boxplot comparing signal variability across the two sample groups
+
+### Summary
+This step evaluates the overall consistency and variability of chromatin accessibility signals across all samples. Coefficient of Variation (CV) is used as the main metric to identify which samples are more stable or variable, which helps guide downstream quality filtering.
+
 
