@@ -67,18 +67,6 @@ Performed basic descriptive statistics to assess the distribution and variabilit
      - **Coefficient of Variation (CV)** (calculated as `SD / Mean`)
    
 <div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: middle;
-    }
 </style>
 <table border="1" class="dataframe" style="margin-left: auto; margin-right: auto;">
   <thead>
