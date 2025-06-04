@@ -16,4 +16,5 @@ dependencies:
   - openpyxl
   - git
   - git-lfs
+  - intervaltree
   
