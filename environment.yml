@@ -1,0 +1,21 @@
+name: REAL_FORKED_Bioinfo_project
+channels:
+   - conda-forge
+   - defaults
+dependencies:
+  - python=3.10
+  - ipykernel
+  - pip
+  - pip:
+      - intervaltree
+  - anndata
+  - jupyter
+  - numpy
+  - seaborn
+  - matplotlib
+  - scanpy
+  - pandas
+  - openpyxl
+  - git
+  - git-lfs
+  
