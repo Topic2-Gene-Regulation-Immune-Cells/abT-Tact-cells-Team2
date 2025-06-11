@@ -15,12 +15,4 @@ dependencies:
   - matplotlib
   - scanpy
   - pandas
-  - openpyxl
-  - git
-  - git-lfs
-<<<<<<< HEAD
-=======
-  - intervaltree
-  - umap-learn
->>>>>>> fb12fdb94dca09fd32886ffaedcd3af503f7e542
-  
+
