@@ -6,11 +6,8 @@ dependencies:
   - python=3.10
   - ipykernel
   - pip
-<<<<<<< HEAD
   - pip:
       - intervaltree
-=======
->>>>>>> ATAC-seq-wrangling
   - anndata
   - jupyter
   - numpy
@@ -19,13 +16,8 @@ dependencies:
   - scanpy
   - pandas
   - openpyxl
-<<<<<<< HEAD
   - git
   - git-lfs
   - intervaltree
   - umap-learn
   
-=======
-
-
->>>>>>> ATAC-seq-wrangling

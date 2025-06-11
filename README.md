@@ -67,10 +67,7 @@ Performed basic descriptive statistics to assess the distribution and variabilit
      - **Coefficient of Variation (CV)** (calculated as `SD / Mean`)
    
 <div>
-<<<<<<< HEAD
 </style>
-=======
->>>>>>> ATAC-seq-wrangling
 <table border="1" class="dataframe" style="margin-left: auto; margin-right: auto;">
   <thead>
     <tr style="text-align: right;">
