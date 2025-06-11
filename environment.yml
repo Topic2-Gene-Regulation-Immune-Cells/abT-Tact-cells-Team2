@@ -19,5 +19,8 @@ dependencies:
   - git
   - git-lfs
   - intervaltree
+<<<<<<< HEAD
   - umap-learn
+=======
+>>>>>>> e6f2e60 (Adding intervaltree to the environment)
   
