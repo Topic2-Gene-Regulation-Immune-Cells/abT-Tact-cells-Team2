@@ -6,11 +6,8 @@ dependencies:
   - python=3.10
   - ipykernel
   - pip
-<<<<<<< HEAD
-=======
   - pip:
       - intervaltree
->>>>>>> 4e8f3f7767d7a49ac29935e44c375238b13a6ad0
   - anndata
   - jupyter
   - numpy
@@ -21,9 +18,6 @@ dependencies:
   - openpyxl
   - git
   - git-lfs
-<<<<<<< HEAD
-=======
   - intervaltree
   - umap-learn
->>>>>>> 4e8f3f7767d7a49ac29935e44c375238b13a6ad0
   
