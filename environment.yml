@@ -8,6 +8,7 @@ dependencies:
   - pip
   - pip:
       - intervaltree
+      - gprofiler-official
   - anndata
   - jupyter
   - numpy
@@ -15,4 +16,10 @@ dependencies:
   - matplotlib
   - scanpy
   - pandas
+  - openpyxl
+  - git
+  - git-lfs
+  - intervaltree
+  - umap-learn
+  
 
