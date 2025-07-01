@@ -1,357 +1,244 @@
-# ATAC-seq Signal Processing 
+<h1 align="center">
+   Determine Gene Regulation of Immune Cells  
+  <br>
+  from Paired ATAC- and RNA-seq Data  
+  <br>
+  <em>Group 2: abT & T.act cells</em>
+</h1>
 
-This part of the project focuses on:
+## 1. Overview
 
-- Wrangling ATAC-seq signal data 
-- Analyzing signal variability across samples 
+## 2. Project Description / Introduction
+### **2.1 Immune Cell Types: αβ T Cells & Activated T Cells**
 
-The goal is to transform the raw ATAC-seq signal matrix into a tidy format and then assess per-sample variability (mean, median, standard deviation, CV).
+Our project focuses on two related immune cell types: αβ T cells (abT) and their activated counterparts (T.act). The specific cell types analyzed in this project were chosen based on their representation in the cis-regulatory atlas published by Yoshida et al. (2019), which serves as the foundational reference for our immune cell lineage structure.
+<br><br>
 
----
+<div style="display: flex; gap: 40px; align-items: flex-start;">
 
-## Part 1 – ATAC-seq Wrangling 
+  <figure style="flex: 1; margin: 0;">
+    <img src="./plots/yoshida_tree.png" alt="Full Yoshida lineage tree" width="100%"/>
+    <figcaption><strong>Figure 1.</strong> <em>Full lineage map of mouse immune cells from:</em><br>
+    Yoshida, H., et al. (2019). <em>The cis–Regulatory Atlas of the Mouse Immune System.</em> Cell, 176(4), 897–912.e20.
+    </figcaption>
+  </figure>
 
-### Input
-- **Folder:** `ATAC-seq/`
-- Contains all raw and intermediate ATAC-seq files used for wrangling: 
+  <figure style="flex: 1; margin: 0;">
+    <img src="./plots/yoshida_tree_abttact.png" alt="abT and T.act lineage subset" width="100%"/>
+    <figcaption><strong>Figure 2.</strong> <em>Highlighted subset of the Yoshida et al. lineage tree, showing only the abT and T.act cell branches analyzed in this project.</em></figcaption>
+  </figure>
 
-- `ATAC-seq data.csv`: Original wide-format signal matrix (rows = peaks, columns = all samples). Not modified to avoid accidental deletion.
-- `filtered_ATAC_abT_Tact_Stem.csv`: Subset of the original matrix, keeping only columns related to abT and T.act cell types.
-- `refined_ATAC.csv`: Tidy-format table with selected samples and peaks reshaped into three columns: `peakID`, `SampleID`, and `Signal`.
-
-### Method
-1. **Filter for abT and T.act samples**
-   - File used: `filtered_ATAC_abT_Tact_Stem.csv`
-   - Only keeps columns corresponding to abT and T.act cell types.
-
-2. **Refine and reshape**
-   - File: `refined_ATAC.csv`
-   - Reformats the data to include:
-     - `peakID`
-     - `SampleID`
-     - `Signal`
-   - Puts sample type (abT or T.act) and signal values into two columns (long format).
-
-### Output
-- **Final output:** `refined_ATAC.csv`  
-- This tidy-format file will be used for variability analysis in the next step. 
-
----
-
----
-
-## Part 2 – Signal Variability Analysis 
-
-### Input
-- **File:** `refined_ATAC.csv`  
-  - Output from Part 1's wrangling step, containing tidy ATAC-seq signal values.
-
-### Method
-1. **Library Imports:**
-   - Used `pandas`, `numpy`, `matplotlib`, `seaborn`, and `scanpy` for analysis and visualization.
-
-2. **Data Loading:**
-   - Loaded `refined_ATAC.csv` as a DataFrame for downstream analysis.
-
-3. **Descriptive Statistics:**
-
-Performed basic descriptive statistics to assess the distribution and variability of chromatin accessibility signals across all 29 samples (cell types). The minimum and maximum signal values in the dataset were found to be:
-
-- **Min Signal:** 0.1  
-- **Max Signal:** 727.42  
-
-   - Computed per-sample statistics for the `Signal` column:
-     - **Mean**
-     - **Median**
-     - **Standard Deviation (SD)**
-     - **Coefficient of Variation (CV)** (calculated as `SD / Mean`)
-   
-<div>
-</style>
-<table border="1" class="dataframe" style="margin-left: auto; margin-right: auto;">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>Sample ID</th>
-      <th>Mean</th>
-      <th>Median</th>
-      <th>SD</th>
-      <th>CV</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>preT.DN1.Th</td>
-      <td>4.006249</td>
-      <td>1.34</td>
-      <td>9.896460</td>
-      <td>2.470256</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>preT.DN2a.Th</td>
-      <td>4.009777</td>
-      <td>1.20</td>
-      <td>9.849384</td>
-      <td>2.456342</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>preT.DN2b.Th</td>
-      <td>4.001368</td>
-      <td>1.34</td>
-      <td>9.831580</td>
-      <td>2.457055</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>preT.DN3.Th</td>
-      <td>3.999144</td>
-      <td>1.40</td>
-      <td>9.830203</td>
-      <td>2.458077</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>T.DN4.Th</td>
-      <td>4.000097</td>
-      <td>1.47</td>
-      <td>9.819900</td>
-      <td>2.454915</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>T.ISP.Th</td>
-      <td>3.990197</td>
-      <td>1.54</td>
-      <td>9.660167</td>
-      <td>2.420975</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>T.DP.Th</td>
-      <td>4.002725</td>
-      <td>1.51</td>
-      <td>9.797414</td>
-      <td>2.447686</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>T.4.Th</td>
-      <td>3.984623</td>
-      <td>1.45</td>
-      <td>9.828451</td>
-      <td>2.466595</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>T.8.Th</td>
-      <td>3.988538</td>
-      <td>1.48</td>
-      <td>9.886826</td>
-      <td>2.478810</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>T.4.Nve.Sp</td>
-      <td>3.996412</td>
-      <td>1.37</td>
-      <td>9.819407</td>
-      <td>2.457056</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>T.4.Nve.Fem.Sp</td>
-      <td>3.934404</td>
-      <td>1.47</td>
-      <td>9.928258</td>
-      <td>2.523446</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>T.4.Sp.aCD3+CD40.18hr</td>
-      <td>4.004715</td>
-      <td>1.58</td>
-      <td>9.851863</td>
-      <td>2.460066</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>T.8.Nve.Sp</td>
-      <td>4.000576</td>
-      <td>1.48</td>
-      <td>9.876306</td>
-      <td>2.468721</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>Treg.4.25hi.Sp</td>
-      <td>3.983050</td>
-      <td>1.49</td>
-      <td>9.770408</td>
-      <td>2.452997</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>Treg.4.FP3+.Nrplo.Co</td>
-      <td>3.900618</td>
-      <td>1.15</td>
-      <td>9.873799</td>
-      <td>2.531342</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>T8.TN.P14.Sp</td>
-      <td>3.982565</td>
-      <td>1.57</td>
-      <td>9.886799</td>
-      <td>2.482520</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>T8.TE.LCMV.d7.Sp</td>
-      <td>3.976135</td>
-      <td>1.34</td>
-      <td>9.880270</td>
-      <td>2.484893</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>T8.MP.LCMV.d7.Sp</td>
-      <td>3.962223</td>
-      <td>1.26</td>
-      <td>9.857753</td>
-      <td>2.487935</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>T8.IEL.LCMV.d7.SI</td>
-      <td>3.992190</td>
-      <td>1.42</td>
-      <td>9.696283</td>
-      <td>2.428813</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>T8.Tcm.LCMV.d180.Sp</td>
-      <td>3.936356</td>
-      <td>1.32</td>
-      <td>9.930768</td>
-      <td>2.522833</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>T8.Tem.LCMV.d180.Sp</td>
-      <td>3.984894</td>
-      <td>1.54</td>
-      <td>9.810291</td>
-      <td>2.461870</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>NKT.Sp</td>
-      <td>3.978282</td>
-      <td>1.59</td>
-      <td>9.863354</td>
-      <td>2.479300</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>NKT.Sp.LPS.3hr</td>
-      <td>3.989211</td>
-      <td>1.53</td>
-      <td>9.864762</td>
-      <td>2.472860</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>NKT.Sp.LPS.18hr</td>
-      <td>3.955158</td>
-      <td>1.29</td>
-      <td>9.903218</td>
-      <td>2.503874</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>NKT.Sp.LPS.3d</td>
-      <td>3.990898</td>
-      <td>1.49</td>
-      <td>9.884233</td>
-      <td>2.476694</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>LTHSC.34-.BM</td>
-      <td>3.868438</td>
-      <td>0.41</td>
-      <td>10.004101</td>
-      <td>2.586083</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>LTHSC.34+.BM</td>
-      <td>4.005767</td>
-      <td>1.64</td>
-      <td>9.986633</td>
-      <td>2.493064</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>STHSC.150-.BM</td>
-      <td>4.001125</td>
-      <td>0.90</td>
-      <td>9.991892</td>
-      <td>2.497271</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>MPP4.135+.BM</td>
-      <td>4.002324</td>
-      <td>1.58</td>
-      <td>9.994831</td>
-      <td>2.497257</td>
-    </tr>
-  </tbody>
-</table>
 </div>
 
-
-Globally speaking, there is not much of a difference between the cell types. The values are almost identical, which leads us to a possible conclusion that minimal changes in chromatin accessibility (i.e. individual enhancers) may be what differentiates the cell types. 
-
-![Per-Sample Mean in ATAC-seq Signal](plots/image.png)
-
-**Fig. 1: Mean values of ATAC-seq peak signal in progenitor, abT and T-act cells.** The values of the mean signal in all cell types lie around 4.0. Little difference between the cell types can be observed.
-
-![Per-Sample Median in ATAC-seq Signal](plots/image-1.png)
-
-**Fig. 2: Median values of ATAC-seq peak signal in progenitor, abT, and T.act cells.** The median values for all cell types are fairly low and lie between 0.4 and a little over 1.6.
-
-![Per-Sample CV of ATAC-seq signal](plots/image-2.png)
-
-**Fig. 3: Coefficient of variance (CV) values of ATAC-seq peak signals in progenitor, abT, and T.act cells.** The CVs of all cell types are quite similar with a value of around 2.5.
+<br><br>
 
 
-<p align="justify">
-Plotting the mean (Fig. 1) confirms that the signal values across peaks are generally low and fairly similar to each other. This result is plausible, as there are more than 500.000 peaks being examined across 20 chromosomes, and tells us that differences that occur between cell types should be examined locally. 
+### <u>αβ T Cells (abT)</u>
+
+**αβ T cells** are the major class of conventional T lymphocytes in the adaptive immune system. They express T-cell receptors (TCRs)composed of α and β chains, and differentiate into:
+
+- **CD8⁺ cytotoxic T cells** — eliminate virus-infected or tumor cells  
+- **CD4⁺ helper T cells** — secrete cytokines and coordinate immune responses
+
+ Zhang, Y., et al. (2023).
+
+<hr style="border: none; border-top: 1px solid #eee;">
+
+
+### <u>Activated T Cells (T.act)</u>
+
+Once stimulated by antigen, naive αβ T cells become activated and acquire effector functions:
+
+- **Activated CD8⁺ T cells** become cytotoxic killers  
+- **Activated CD4⁺ T cells** coordinate other immune cells via cytokine release
+
+ Zhang, Y., et al. (2023)
+
+---
+
+### **2.2 ATAC-seq and RNA-seq: Purpose and Relevance**
+
+
+To understand how abT and Tact cells regulate gene expression, we use data from two complementary technologies:
+
+### <u> RNA-seq </u>
+RNA sequencing measures gene expression by quantifying transcribed RNA molecules. It enables high-throughput, unbiased insights into:
+- Cell differentiation
+- Disease progression
+- Functional genomics
+
+However, RNA-seq alone does not reveal upstream chromatin structure or how gene expression is regulated.
+
+<hr style="border: none; border-top: 1px solid #eee;">
+
+### <u> ATAC-seq </u>
+ATAC-seq (Assay for Transposase-Accessible Chromatin with sequencing) maps open chromatin regions by inserting sequencing adapters at accessible DNA sites using the Tn5 transposase.  
+This lets us identify regulatory elements like promoters and enhancers.
+
+Key advantages:
+- Requires fewer cells
+- Simpler, faster protocol
+- High resolution of chromatin accessibility
+- Allows inference of transcription factor binding and nucleosome positioning
+
+The main idea is combining ATAC-seq and RNA-seq to allow us to reconstruct regulatory networks and track cell state transitions. In our study, this joint analysis helps us understand how different immune cell types specialize by using different regulatory DNA elements.
+
+<hr style="border: none; border-top: 1px solid #eee;">
+
+<p>
+  <img src="./plots/atac_seq_diagram.png" width="600"/>
 </p>
-<p align="justify">
-The median (Fig. 2) shows values between 0.4 and around 1.6. This indicates that most of the values are quite small, however unlike the mean here some kind of variance can be observed. Whether the difference here is significant on a global should be examined further.
-</p>
 
-<p align="justify">
-When it comes to the coefficient of variance or CV (Fig. 3), the bar plot is really similar to the mean. There are not any major differences between the cell types with the value being around 2.5 in all cases. 
-</p>
+**Figure 3.** Schematic of ATAC-seq signal logic and components.  
+*Source: Yan, F., et al. (2020). From reads to insight: a hitchhiker’s guide to ATAC-seq data analysis. Genome Biology, 21(22).*
 
-___
 
-### Summary
 
-<p align="justify">
-To summarize, after loading and inspecting the refined ATAC-seq data basic statistical methods were employed. The mean and the CV did not show any noticeable differences between cell types. However, the median was more variable and could potentially be relevant when it comes to overall chromatin accessibility. Nevertheless, all values were fairly low when compared to the maximal signal atained (727.42). 
-</p>
+- Reference datasets and articles (e.g., Yoshida et al., Sasse et al.) - what exactly??? 
 
-<p align="justify">
-These results suggest that the global structure of chromatin does not differ significantly across cell types. Instead, it is quite possible that local changes in the accessibility of individual elements (e.g. enhancers) play an important role in the differentiation. Those claims are to be examined further in the following weeks together with the data on gene expression provided by RNA-seq.
-</p>
+### **2.4 Research Goals**
 
+- we should write this down together because chatgpt is not helping... what exactly do we wanna list as our objectives??
+
+
+## 3. Dependencies
+
+maybe put a URL 
+  - anndata=0.11.4=pyhd8ed1ab_0
+  - array-api-compat=1.12.0=pyhe01879c_0
+  - blas=1.0=openblas
+  - bottleneck=1.4.2=py313ha35b7ea_0
+  - brotli-python=1.0.9=py313h313beb8_9
+  - bzip2=1.0.8=h80987f9_6
+  - c-ares=1.34.5=h5505292_0
+  - ca-certificates=2025.4.26=hbd8a1cb_0
+  - colorama=0.4.6=pyhd8ed1ab_1
+  - contourpy=1.3.1=py313h48ca7d4_0
+  - cycler=0.11.0=pyhd3eb1b0_0
+  - exceptiongroup=1.3.0=pyhd8ed1ab_0
+  - expat=2.7.1=h313beb8_0
+  - fonttools=4.55.3=py313h80987f9_0
+  - freetype=2.13.3=h47d26ad_0
+  - git-lfs=3.6.1=h55e91fe_0
+  - h5py=3.12.1=py313h0957e0b_1
+  - hdf5=1.14.5=hd77251f_2
+  - icu=73.2=hc8870d7_0
+  - joblib=1.5.0=pyhd8ed1ab_0
+  - jpeg=9e=h80987f9_3
+  - kiwisolver=1.4.8=py313h313beb8_0
+  - krb5=1.20.1=h69eda48_0
+  - lcms2=2.16=he26ebf3_1
+  - legacy-api-wrap=1.4.1=pyhd8ed1ab_0
+  - lerc=4.0.0=h313beb8_0
+  - libcurl=8.12.1=hde089ae_0
+  - libcxx=20.1.5=ha82da77_0
+  - libdeflate=1.22=h80987f9_0
+  - libedit=3.1.20191231=hc8eb9b7_2
+  - libev=4.33=h93a5062_2
+  - libffi=3.4.4=hca03da5_1
+  - libgfortran=5.0.0=11_3_0_hca03da5_28
+  - libgfortran5=11.3.0=h009349e_28
+  - libhwloc=2.11.2=default_hbce5d74_1001
+  - libiconv=1.18=hfe07756_1
+  - libmpdec=4.0.0=h80987f9_0
+  - libnghttp2=1.57.0=h62f6fdd_0
+  - libopenblas=0.3.29=hea593b9_0
+  - libpng=1.6.39=h80987f9_0
+  - libssh2=1.11.1=h3e2b118_0
+  - libtiff=4.7.0=h91aec0a_0
+  - libwebp-base=1.3.2=h80987f9_1
+  - libxml2=2.13.8=h0b34f26_0
+  - llvm-openmp=20.1.5=hdb05f8b_0
+  - llvmlite=0.44.0=py313heb35c27_1
+  - lz4-c=1.9.4=h313beb8_1
+  - matplotlib=3.10.0=py313hca03da5_1
+  - matplotlib-base=3.10.0=py313hb68df00_0
+  - natsort=8.4.0=pyh29332c3_1
+  - ncurses=6.4=h313beb8_0
+  - networkx=3.4.2=pyh267e887_2
+  - numba=0.61.2=py313h8aea8d6_0
+  - numexpr=2.10.1=py313h5d9532f_0
+  - numpy=2.2.5=py313hdcf7240_0
+  - numpy-base=2.2.5=py313h9d8309b_0
+  - openjpeg=2.5.2=hba36e21_1
+  - openssl=3.5.0=h81ee809_1
+  - packaging=24.2=py313hca03da5_0
+  - pandas=2.2.3=py313hcf29cfe_0
+  - patsy=1.0.1=pyhd8ed1ab_1
+  - pillow=11.1.0=py313h41ba818_1
+  - pip=25.1=pyhc872135_2
+  - pynndescent=0.5.13=pyhd8ed1ab_1
+  - pyparsing=3.2.0=py313hca03da5_0
+  - python=3.13.2=h4862095_100_cp313
+  - python-dateutil=2.9.0post0=py313hca03da5_2
+  - python-tzdata=2025.2=pyhd3eb1b0_0
+  - python_abi=3.13=0_cp313
+  - pytz=2024.1=py313hca03da5_0
+  - readline=8.2=h1a28f6b_0
+  - scanpy=1.11.1=pyhd8ed1ab_0
+  - scikit-learn=1.5.2=py313h14e4f8e_1
+  - scipy=1.15.3=py313hd7edaaf_0
+  - seaborn=0.13.2=py313hca03da5_2
+  - session-info2=0.1.2=pyhd8ed1ab_0
+  - setuptools=72.1.0=py313hca03da5_0
+  - six=1.17.0=py313hca03da5_0
+  - sqlite=3.45.3=h80987f9_0
+  - statsmodels=0.14.4=py313h93df234_0
+  - tbb=2022.1.0=h9541205_0
+  - threadpoolctl=3.6.0=pyhecae5ae_0
+  - tk=8.6.14=h6ba3021_0
+  - tornado=6.4.2=py313h80987f9_0
+  - tqdm=4.67.1=pyhd8ed1ab_1
+  - typing-extensions=4.13.2=h0e9735f_0
+  - typing_extensions=4.13.2=pyh29332c3_0
+  - tzdata=2025b=h04d1e81_0
+  - umap-learn=0.5.7=py313h8f79df9_1
+  - wheel=0.45.1=py313hca03da5_0
+  - xz=5.6.4=h80987f9_1
+  - zlib=1.2.13=h18a0788_1
+  - zstd=1.5.6=hfb09047_0
+
+## 4. Project Organization
+We used the following notebooks in order to work on the tasks:
+
+### **1. ATAC-seq wrangling**
+This notebook prepares the ATAC-seq dataset for downstream analysis. It includes cell type annotation, filtering low-quality cells, normalization of signal values, and initial visual checks. The cleaned dataset serves as the foundation for all ATAC-based analyses in later steps. Note that this filtering was done not as the first task, but rather later on in the project as we saw multiple reasons to do the filtering this way, and later on we reran certain analyses. (see Results and Discussion -here we need to specify where exactly we talked ab this-)
+
+### **2. Stat-ATAC**
+To explore the distribution and structure of chromatin accessibility across immune cell types, we performed preliminary statistical analyses on the unfiltered ATAC-seq dataset. This included computing summary statistics and visualizing patterns using methods like bar plots. However, these initial results lacked biological clarity and interpretability. Based on these limitations, we later decided to filter and clean the ATAC dataset (the process documented in the first notebook) to enable more meaningful downstream analyses.
+
+### **3. Stat-peaks**
+to be honest im not sure if we should include this one, maybe we can merge it w the one above 
+
+### **4. Q2_qc_vs_signal**
+This notebook assessed the quality of the unfiltered ATAC-seq dataset by investigating potential correlations between signal intensity and various QC metrics (e.g. number of fragments, duplication rate). Overall data quality appeared good and we found little to no correlation between ATAC signal and QC metrics. 
+
+### **5. TSS distance**
+this is where i stop for tonight because i want to fix the broken code here 
+
+### **6. Signal comparison**
+### **7. ATAC Clustering Analysis**
+### **8. Gene-expression clustering week 3**
+### **9. Compare atac rna**
+### **10. abT Tact gene clusters**
+### **11. CRE location and expression correlation**
+### **12. CRE location counts (TBD)**
+### **13. Regression model (TBD)**
+### **4. Regression model (part 2) *about to be pushed* (TBD)**
+
+
+## 5. Results
+- Basic statistics and QC metrics
+- Clustering of CREs and cell types
+- Gene clustering and functional annotation
+- Regression analysis and assignment of CREs to specific genes
+
+## 6. Discussion
+
+
+
+## 7. Resources 
+
+1. Yoshida, H., et al. (2019). The cis-Regulatory Atlas of the Mouse Immune System. Cell, 176(4), 897–912.e20.
+
+2. — Zhang, Y., et al. (2023). *T cell development and differentiation: insights from single-cell transcriptomics.* *Signal Transduction and Targeted Therapy*, **8**, 191. [https://doi.org/10.1038/s41392-023-01471-y](https://doi.org/10.1038/s41392-023-01471-y)
