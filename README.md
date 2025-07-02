@@ -214,14 +214,31 @@ to be honest im not sure if we should include this one, maybe we can merge it w 
 This notebook assessed the quality of the unfiltered ATAC-seq dataset by investigating potential correlations between signal intensity and various QC metrics (e.g. number of fragments, duplication rate). Overall data quality appeared good and we found little to no correlation between ATAC signal and QC metrics. 
 
 ### **5. TSS distance**
-this is where i stop for tonight because i want to fix the broken code here 
+i dont think we should hand in this notebook, the reason i cannot delete this is because i did this one first and the first part worked perfectly, and we later used a file that we extracted from that code somewhere else so it has to stay.... i tried copying the new notebook into this one but it did not work (the code)
+
+### **5. TSS distance New**
+In this notebook we computed each peak’s distance to its nearest TSS, plotted the distance distribution, merged in mean ATAC signal, and assesed & plot  the signal–distance relationship using pearson.
 
 ### **6. Signal comparison**
+This notebook represents an early attempt to classify regulatory elements as promoters or enhancers based solely on their distance to the transcription start site (TSS). Although we were aware that such a naive distance-based classification would likely be insufficient, this trial allowed us to explore the feasibility of this approach. The method was not robust or conclusive and ultimately was not used in downstream analyses.
+
 ### **7. ATAC Clustering Analysis**
+This notebook contains the main ATAC-seq clustering analysis, performed on the filtered dataset. We reduced dimensionality using PCA, UMAP, and t-SNE, and visualized the accessibility profiles across immune cell types. Clustering patterns were inspected to assess whether related cell types (specifically, progenitor, αβ T cells, activated T cells) group together based on their chromatin accessibility. This analysis directly addressed our goal of defining similarities and differences in chromatin landscapes between cell types.
+
+
 ### **8. Gene-expression clustering week 3**
+This notebook mirrors the ATAC-seq clustering approach, but applied to RNA-seq data. 
+
 ### **9. Compare atac rna**
+In this notebook, we directly compared ATAC-seq and RNA-seq clustering results by aligning the dimensionality reduction plots (PCA, UMAP, t-SNE) of both datasets side by side. We matched and renamed cell types across datasets to unify labels and enable visual comparison. The aim was to assess whether chromatin accessibility and gene expression reflect similar relationships between immune cell types, and to what extent their clustering patterns overlap or diverge.
+
 ### **10. abT Tact gene clusters**
+gene ontology but im not sure how to explain this 
+
 ### **11. CRE location and expression correlation**
+This notebook explores the relationship between chromatin accessibility at cis-regulatory elements (CREs) and gene expression, with a focus on the distance to the transcription start site (TSS). We included both upstream and downstream regions in the correlation analysis to test how proximity and position relative to the TSS influence the association strength. The goal was to gain insight into spatial trends that might inform further CRE-gene linking strategies.
+
+the rest idk rn 
 ### **12. CRE location counts (TBD)**
 ### **13. Regression model (TBD)**
 ### **4. Regression model (part 2) *about to be pushed* (TBD)**
@@ -229,6 +246,9 @@ this is where i stop for tonight because i want to fix the broken code here
 
 ## 5. Results
 - Basic statistics and QC metrics
+
+<img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="400"/>
+
 - Clustering of CREs and cell types
 - Gene clustering and functional annotation
 - Regression analysis and assignment of CREs to specific genes
