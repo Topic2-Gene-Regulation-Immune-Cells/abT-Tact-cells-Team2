@@ -248,8 +248,43 @@ the rest idk rn
 - Basic statistics and QC metrics
 
 <img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="400"/>
+ 
+**Figure 4.** *Variance vs. -log10P for ATAC-seq peaks*  
+Notebook: ATAC_seq_wrangling
+
+
+**5.1 Filtered Out Genes Based On Variance and Confidence Score**
+<br>
+With the goal of keeping only the most relevant peaks for our downstream analysis, different metrics concerning the ATAC-seq dataset were analyzed and compared with the help of different plots. The most meaningful method was to filter out peaks with the lowest variance. This ensured that CREs with a similar availability across cell types were dismissed, since they are probably related to, for example, housekeeping genes with a continuous expression throughout a cell’s differentiation process and don’t offer any significant input for our research. For this, variance was calculated per peak across cell type, and the cutoff was based on the median absolute deviation (MAD) of the calculated variance.
+<br>
+Besides that, peaks with a very low confidence score were also filtered out. This score is calculated during peak calling and is related to the enrichment of that sequence against the background. Low confidence peaks might deliver misleading results, hence why they were left out of downstream analysis.
+
+**5.2 TSS Distance Based Characterization of Peaks**
+<br>
+Distribution of peak distances and corresponding ATAC signal intensity
+
+<img src="./plots/ReadMe/2_TSS_distance.png" alt="Hexbin plot of signal vs signal" width="600"/>
+
+**Figure 5.** *Distribution of peaks by distance to the nearest TSS*  
+Notebook: TSS_distance
+
+<br> We analyzed the genomic distribution of ATAC-seq peaks based on their distance to the nearest transcription start site (TSS). The largest proportion of peaks is found either very close to the TSS (0–500 bp) or far away (>20 kb), with ~28% and ~36% respectively.
+
+<img src="./plots/ReadMe/3_MedianSignal_vs_TSSDistance.png" alt="Median ATAC signal by distance to TSS" width="600"/>
+
+**Figure 6.** *Binned median ATAC signal by distance to TSS*  
+Notebook: TSS_distance 
+
+<br> 
+We also examined how the median ATAC signal varies with distance. Peaks located near the TSS show the highest accessibility signal, which rapidly decreases with increasing distance.
+
+
+
+
+
 
 - Clustering of CREs and cell types
+
 - Gene clustering and functional annotation
 - Regression analysis and assignment of CREs to specific genes
 
