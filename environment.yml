@@ -22,5 +22,6 @@ dependencies:
   - intervaltree
   - statsmodels
   - umap-learn
+  - fastcluster
   
 
