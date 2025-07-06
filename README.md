@@ -204,16 +204,16 @@ We used the following notebooks in order to work on the tasks:
 ### **1. ATAC-seq wrangling**
 This notebook prepares the ATAC-seq dataset for downstream analysis. It includes cell type annotation, filtering low-quality cells, normalization of signal values, and initial visual checks. The cleaned dataset serves as the foundation for all ATAC-based analyses in later steps. Note that this filtering was done not as the first task, but rather later on in the project as we saw multiple reasons to do the filtering this way, and later on we reran certain analyses. (see Results and Discussion -here we need to specify where exactly we talked ab this-)
 
-### **2. Stat-ATAC**
+### **2. Stats_Across_Cells**
 To explore the distribution and structure of chromatin accessibility across immune cell types, we performed preliminary statistical analyses on the unfiltered ATAC-seq dataset. This included computing summary statistics and visualizing patterns using methods like bar plots. However, these initial results lacked biological clarity and interpretability. Based on these limitations, we later decided to filter and clean the ATAC dataset (the process documented in the first notebook) to enable more meaningful downstream analyses.
 
-### **3. Stat-peaks**
-to be honest im not sure if we should include this one, maybe we can merge it w the one above 
+### **3. Stats_Across_Peaks**
+Descriptive statistics of cell types across ATAC-seq peaks.
 
-### **4. Q2_qc_vs_signal**
+### **4. qc_vs_signal**
 This notebook assessed the quality of the unfiltered ATAC-seq dataset by investigating potential correlations between signal intensity and various QC metrics (e.g. number of fragments, duplication rate). Overall data quality appeared good and we found little to no correlation between ATAC signal and QC metrics. 
 
-### **5. TSS distance**
+### **5. tss_distance parts 1 & 2**
 i dont think we should hand in this notebook, the reason i cannot delete this is because i did this one first and the first part worked perfectly, and we later used a file that we extracted from that code somewhere else so it has to stay.... i tried copying the new notebook into this one but it did not work (the code)
 
 ### **5. TSS distance New**
@@ -253,13 +253,13 @@ the rest idk rn
 Notebook: ATAC_seq_wrangling
 
 
-**5.1 Filtered Out Genes Based On Variance and Confidence Score**
+### **5.1 Filtered Out Genes Based On Variance and Confidence Score**
 <br>
 With the goal of keeping only the most relevant peaks for our downstream analysis, different metrics concerning the ATAC-seq dataset were analyzed and compared with the help of different plots. The most meaningful method was to filter out peaks with the lowest variance. This ensured that CREs with a similar availability across cell types were dismissed, since they are probably related to, for example, housekeeping genes with a continuous expression throughout a cell’s differentiation process and don’t offer any significant input for our research. For this, variance was calculated per peak across cell type, and the cutoff was based on the median absolute deviation (MAD) of the calculated variance.
 <br>
 Besides that, peaks with a very low confidence score were also filtered out. This score is calculated during peak calling and is related to the enrichment of that sequence against the background. Low confidence peaks might deliver misleading results, hence why they were left out of downstream analysis.
 
-**5.2 TSS Distance Based Characterization of Peaks**
+### **5.2 TSS Distance Based Characterization of Peaks**
 <br>
 Distribution of peak distances and corresponding ATAC signal intensity
 
@@ -275,15 +275,35 @@ Notebook: TSS_distance
 **Figure 6.** *Binned median ATAC signal by distance to TSS*  
 Notebook: TSS_distance 
 
-<br> 
 We also examined how the median ATAC signal varies with distance. Peaks located near the TSS show the highest accessibility signal, which rapidly decreases with increasing distance.
 
+### **5.3 Clustering**<br>
+As a way of analyzing how the chromatin landscape and gene expression pattern shape cell lines throughout differentiation, we ran a clustering analysis on our cell types.<br>
+We used the elbow method to determine the optimal amount of clusters: k = 5
+
+<img src="image\README\clustering_umap_atac_rna.png" width="600"/>
+
+This clustering subdivided our cells into the following subgroups:
 
 
 
+| 0 | 1 | 2 | 3 | 4 |
+|:--|:--|:--|:--|:--|
+| <ul><li>T.4.Th</li><li>T.8.Th</li><li>T.4.Nve.Sp</li><li>T.4.Nve.Fem.Sp</li><li>T.4.Sp.aCD3+CD40.18hr</li><li>T.8.Nve.Sp</li><li>Treg.4.25hi.Sp</li><li>Treg.4.FP3+.Nrplo.Co</li><li>T8.TN.P14.Sp</li><li>T8.Tcm.LCMV.d180.Sp</li><li>T8.Tem.LCMV.d180.Sp</li><li>NKT.Sp</li><li>NKT.Sp.LPS.3hr</li><li>NKT.Sp.LPS.18hr</li><li>NKT.Sp.LPS.3d</li></ul> | <ul><li>LTHSC.34-.BM</li></ul> | <ul><li>preT.DN2b.Th</li><li>preT.DN3.Th</li><li>T.DN4.Th</li><li>T.ISP.Th</li><li>T.DP.Th</li></ul> | <ul><li>preT.DN1.Th</li><li>preT.DN2a.Th</li><li>LTHSC.34+.BM</li><li>STHSC.150-.BM</li><li>MPP4.135+.BM</li></ul> | <ul><li>T8.TE.LCMV.d7.Sp</li><li>T8.MP.LCMV.d7.Sp</li><li>T8.IEL.LCMV.d7.Gut</li></ul> |
 
 
-- Clustering of CREs and cell types
+As a way to compare the clustering to the established division of the cell types into the groups αβ-T, T.act and Progenitor, we ran the clustering with k = 3. The cell types were then subdivided as follows:
+
+| 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                                                                                                                                                         | 2                                                                                                                                                                                                              |
+|:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| <ul><li>T.DP.Th (abT)</li><li>T.4.Th (abT)</li><li>T.8.Th (abT)</li><li>T.4.Nve.Sp (abT)</li><li>T.4.Nve.Fem.Sp (abT)</li><li>T.8.Nve.Sp (abT)</li><li>Treg.4.25hi.Sp (abT)</li><li>T8.TN.P14.Sp (abT)</li><li>T8.Tcm.LCMV.d180.Sp (Tact)</li><li>T8.Tem.LCMV.d180.Sp (Tact)</li><li>NKT.Sp (abT)</li><li>NKT.Sp.LPS.3hr (Tact)</li><li>NKT.Sp.LPS.18hr (Tact)</li><li>NKT.Sp.LPS.3d (Tact)</li></ul> | <ul><li>preT.DN1.Th (abT)</li><li>preT.DN2a.Th (abT)</li><li>LTHSC.34-.BM (Progenitor)</li><li>LTHSC.34+.BM (Progenitor)</li><li>STHSC.150-.BM (Progenitor)</li><li>MPP4.135+.BM (Progenitor)</li></ul> | <ul><li>preT.DN2b.Th (abT)</li><li>preT.DN3.Th (abT)</li><li>T.DN4.Th (abT)</li><li>T.ISP.Th (abT)</li><li>T.4.Sp.aCD3+CD40.18hr (Tact)</li><li>Treg.4.FP3+.Nrplo.Co (abT)</li><li>T8.TE.LCMV.d7.Sp (Tact)</li><li>T8.MP.LCMV.d7.Sp (Tact)</li><li>T8.IEL.LCMV.d7.Gut (Tact)</li></ul> |
+
+Although these clusterings don't completely reproduce known relationships between cells, it does shows us that chromatin landscape and gene expression profiles are key elements in identifying cellular subgroups.
+
+Take cluster 1, for example. It includes all progenitor cells and the two first pre-T cells that appear in the differentiation process. The chromatin and transcriptional profiles here are distinct enough to separate these cell types into the same cluster.
+
+
+
 
 - Gene clustering and functional annotation
 - Regression analysis and assignment of CREs to specific genes
