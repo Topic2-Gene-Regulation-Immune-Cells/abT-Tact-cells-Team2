@@ -9,6 +9,7 @@ dependencies:
   - pip:
       - intervaltree
       - gprofiler-official
+      - wordcloud
   - anndata
   - jupyter
   - numpy
