@@ -308,6 +308,92 @@ Take cluster 1, for example. It includes all progenitor cells and the two first 
 - Gene clustering and functional annotation
 - Regression analysis and assignment of CREs to specific genes
 
+The Regression Model 
+
+
+**Figure: Distribution of R² values across genes**  
+*Notebook: `regression_model`*  
+This plot shows how much of the gene expression variance is explained by the CRE signals per gene. A considerable number of genes show low R² (poorly explained), while the rest are fairly evenly distributed, with the median R² around 0.44.
+
+Comparing the Regression Model to Pure Association by Correlation
+
+
+**Figure: Single-peak correlation vs. multivariate R²**  
+*Notebook: `regression_vs_correlation`*  
+This plot compares each gene’s maximum absolute Pearson correlation with its multivariate R² from the Lasso model. Most genes follow a general trend—higher max |r| leads to higher R²—but many lie above the r² curve, indicating added predictive power from combining multiple peaks. Others fall below it, where Lasso likely rejected spurious correlations. This highlights the benefit of multivariate modeling beyond simple associations.
+
+Enhancers Promoters
+CREs were assigned a functional role based on their regression coefficient sign and proximity to the TSS in gene-peak pairs with high model performance (R² > 0.7).
+
+
+
+
+**Figure: Regression coefficients vs. distance to TSS**  
+**Notebook: enhancers_promoters_regression**
+
+Activators and promoters show positive effects closer to the TSS, while repressors exert negative effects across a broader distance range.
+
+
+
+
+
+
+Are there differences between activating and repressing CREs?
+
+**Figure: Summary statistics of CRE distances to TSS**  
+**Notebook: enhancers_promoters_regression**
+
+| Role      | Count   | Min | 25%  | Median | 75%   | Max     |
+|-----------|---------|-----|------|--------|-------|---------|
+| Activator | 13,685  | 1   | 418  | 4,448  | 15,948 | 99,778  |
+| Promoter  | 2,036   | 0   | 26   | 53.5   | 108    | 983     |
+| Repressor | 13,025  | 0   | 126  | 1,303  | 11,544 | 99,880  |
+
+
+So **repressing CREs** are generally more distal than promoters but more proximal than activating CREs.
+
+
+
+
+ How many genes are mainly regulated by repressing CREs, and can promoters act through repression? 
+
+
+**Figure: Genes grouped by dominant CRE role**  
+**Notebook: enhancers_promoters_regression**
+
+Most genes are primarily regulated by activating elements, but a substantial fraction are mainly repressed. A small number are primarily driven by promoter elements, some of which act as repressors.
+
+
+Are there CREs that are repressing for one gene but activating for another gene?
+
+We found that **2623 out of 21,249 CREs (12.3%)** act as **activators for some genes but repressors for others**, highlighting the **context-dependent nature** of regulatory elements.
+
+
+1.ii. d Are intronic enhancers different from enhancers outside the transcript.
+
+| Location    | Count  | % of Enhancers | Activator Fraction | Repressor Fraction | Mean Coefficient | Median Coefficient | Max Coefficient |
+|-------------|--------|----------------|---------------------|---------------------|------------------|--------------------|-----------------|
+| Intergenic  | 21,076 | 78.9%          | 0.486               | 0.514               | 3.85             | 0.87               | 342.0           |
+| Intronic    | 5,634  | 21.1%          | 0.611               | 0.389               | 4.69             | 1.40               | 329.0           |
+
+**Figure:** Overview of enhancer-type CREs by genomic location. Most enhancers are intergenic, but intronic ones are more likely to act as activators and have slightly stronger regression coefficients on average.
+**Notebook: enhancers_promoters_regression**
+
+Can promoters act through repression?
+We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient greater than the strongest repressor** linked to that gene.
+**Notebook: enhancers_promoters_regression**
+
+
+
+
+
+
+Figure: Distribution of absolute effect sizes (|β|) across CREs by location.
+Intronic and intergenic enhancers show similar overall effect size distributions, with slightly higher median |β| in intronic elements. 
+**Notebook: enhancers_promoters_regression**
+
+
+
 ## 6. Discussion
 
 
