@@ -20,6 +20,8 @@ dependencies:
   - git
   - git-lfs
   - intervaltree
+  - statsmodels
   - umap-learn
+  - fastcluster
   
 
