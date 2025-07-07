@@ -350,7 +350,7 @@ Most enhancers are intergenic, but intronic ones are more likely to act as activ
 
 ### **Promoters Acting Through Repression**
 
-We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient greater than the strongest repressor** linked to that gene.
+We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient greater than the strongest repressor** linked to that gene.<br>
 **Notebook: enhancers\_promoters\_regression**
 
 
@@ -376,6 +376,19 @@ Using predefined gene clusters based on the RNAseq, we then assigned specific ge
 **Figure 16:** *Top gene ontology terms for T.act cells after filtering*
 <br> 
 **Notebook: abT_Tact_gene_clusters**
+
+### **Impact of including effect direction on CRE clustering**
+<p align="justify">
+Finally, we compared how much the CRE clustering on peak accessibility changed when we included the results of our regression model classifying peaks into activators or repressors. For that purpose, we calculated the mean value of peak accessibility across all cell types and created a directional and a non-directional matrix. We performed hierarchical clustering on both and then overlaped the clusters in a heatmap for comparison. 
+</p>
+<img src="image\README\overlap_clustering_CREs.png" alt="CRE distribution by location and role" width="500"/>
+
+**Figure 17.** *Overlap non-directional and directional clustering* <br>
+**Notebook: ATAC_Clustering_Analysis**
+
+<p align="justify">
+The heatmap shows that the incorporation of the effect direction changed the clustering drastically, revealing that activator vs repressor CREs carry meaningful information that adds discriminative power to the cell‐type classification.
+</p>
 
 ## **6. Discussion**
 
