@@ -98,150 +98,24 @@ The main idea is combining ATAC-seq and RNA-seq to allow us to reconstruct regul
 
 ### **2.4 Research Goals**
 
-- we should write this down together because chatgpt is not helping... what exactly do we wanna list as our objectives??
+**1.** Characterizing the chromatin landscape across immune cell lineages.
+
+**2.** Tracing chromatin accessibility patterns and gene expression levels.
+
+**3.** Constructing regression model to quantify OCR activity linked to gene expression.
+
+**4.** Identifying regulatory elements involved in the transcriptional identity of αβ-T and T.act cells.
+
+
 
 
 ## 3. Dependencies
 
-maybe put a URL 
-  - anndata=0.11.4=pyhd8ed1ab_0
-  - array-api-compat=1.12.0=pyhe01879c_0
-  - blas=1.0=openblas
-  - bottleneck=1.4.2=py313ha35b7ea_0
-  - brotli-python=1.0.9=py313h313beb8_9
-  - bzip2=1.0.8=h80987f9_6
-  - c-ares=1.34.5=h5505292_0
-  - ca-certificates=2025.4.26=hbd8a1cb_0
-  - colorama=0.4.6=pyhd8ed1ab_1
-  - contourpy=1.3.1=py313h48ca7d4_0
-  - cycler=0.11.0=pyhd3eb1b0_0
-  - exceptiongroup=1.3.0=pyhd8ed1ab_0
-  - expat=2.7.1=h313beb8_0
-  - fonttools=4.55.3=py313h80987f9_0
-  - freetype=2.13.3=h47d26ad_0
-  - git-lfs=3.6.1=h55e91fe_0
-  - h5py=3.12.1=py313h0957e0b_1
-  - hdf5=1.14.5=hd77251f_2
-  - icu=73.2=hc8870d7_0
-  - joblib=1.5.0=pyhd8ed1ab_0
-  - jpeg=9e=h80987f9_3
-  - kiwisolver=1.4.8=py313h313beb8_0
-  - krb5=1.20.1=h69eda48_0
-  - lcms2=2.16=he26ebf3_1
-  - legacy-api-wrap=1.4.1=pyhd8ed1ab_0
-  - lerc=4.0.0=h313beb8_0
-  - libcurl=8.12.1=hde089ae_0
-  - libcxx=20.1.5=ha82da77_0
-  - libdeflate=1.22=h80987f9_0
-  - libedit=3.1.20191231=hc8eb9b7_2
-  - libev=4.33=h93a5062_2
-  - libffi=3.4.4=hca03da5_1
-  - libgfortran=5.0.0=11_3_0_hca03da5_28
-  - libgfortran5=11.3.0=h009349e_28
-  - libhwloc=2.11.2=default_hbce5d74_1001
-  - libiconv=1.18=hfe07756_1
-  - libmpdec=4.0.0=h80987f9_0
-  - libnghttp2=1.57.0=h62f6fdd_0
-  - libopenblas=0.3.29=hea593b9_0
-  - libpng=1.6.39=h80987f9_0
-  - libssh2=1.11.1=h3e2b118_0
-  - libtiff=4.7.0=h91aec0a_0
-  - libwebp-base=1.3.2=h80987f9_1
-  - libxml2=2.13.8=h0b34f26_0
-  - llvm-openmp=20.1.5=hdb05f8b_0
-  - llvmlite=0.44.0=py313heb35c27_1
-  - lz4-c=1.9.4=h313beb8_1
-  - matplotlib=3.10.0=py313hca03da5_1
-  - matplotlib-base=3.10.0=py313hb68df00_0
-  - natsort=8.4.0=pyh29332c3_1
-  - ncurses=6.4=h313beb8_0
-  - networkx=3.4.2=pyh267e887_2
-  - numba=0.61.2=py313h8aea8d6_0
-  - numexpr=2.10.1=py313h5d9532f_0
-  - numpy=2.2.5=py313hdcf7240_0
-  - numpy-base=2.2.5=py313h9d8309b_0
-  - openjpeg=2.5.2=hba36e21_1
-  - openssl=3.5.0=h81ee809_1
-  - packaging=24.2=py313hca03da5_0
-  - pandas=2.2.3=py313hcf29cfe_0
-  - patsy=1.0.1=pyhd8ed1ab_1
-  - pillow=11.1.0=py313h41ba818_1
-  - pip=25.1=pyhc872135_2
-  - pynndescent=0.5.13=pyhd8ed1ab_1
-  - pyparsing=3.2.0=py313hca03da5_0
-  - python=3.13.2=h4862095_100_cp313
-  - python-dateutil=2.9.0post0=py313hca03da5_2
-  - python-tzdata=2025.2=pyhd3eb1b0_0
-  - python_abi=3.13=0_cp313
-  - pytz=2024.1=py313hca03da5_0
-  - readline=8.2=h1a28f6b_0
-  - scanpy=1.11.1=pyhd8ed1ab_0
-  - scikit-learn=1.5.2=py313h14e4f8e_1
-  - scipy=1.15.3=py313hd7edaaf_0
-  - seaborn=0.13.2=py313hca03da5_2
-  - session-info2=0.1.2=pyhd8ed1ab_0
-  - setuptools=72.1.0=py313hca03da5_0
-  - six=1.17.0=py313hca03da5_0
-  - sqlite=3.45.3=h80987f9_0
-  - statsmodels=0.14.4=py313h93df234_0
-  - tbb=2022.1.0=h9541205_0
-  - threadpoolctl=3.6.0=pyhecae5ae_0
-  - tk=8.6.14=h6ba3021_0
-  - tornado=6.4.2=py313h80987f9_0
-  - tqdm=4.67.1=pyhd8ed1ab_1
-  - typing-extensions=4.13.2=h0e9735f_0
-  - typing_extensions=4.13.2=pyh29332c3_0
-  - tzdata=2025b=h04d1e81_0
-  - umap-learn=0.5.7=py313h8f79df9_1
-  - wheel=0.45.1=py313hca03da5_0
-  - xz=5.6.4=h80987f9_1
-  - zlib=1.2.13=h18a0788_1
-  - zstd=1.5.6=hfb09047_0
+All dependencies used in this project are listed in the [`environment.yml`](./environment.yml) file.  
+
 
 ## 4. Project Organization
-We used the following notebooks in order to work on the tasks:
-
-### **1. ATAC-seq wrangling**
-This notebook prepares the ATAC-seq dataset for downstream analysis. It includes cell type annotation, filtering low-quality cells, normalization of signal values, and initial visual checks. The cleaned dataset serves as the foundation for all ATAC-based analyses in later steps. Note that this filtering was done not as the first task, but rather later on in the project as we saw multiple reasons to do the filtering this way, and later on we reran certain analyses. (see Results and Discussion -here we need to specify where exactly we talked ab this-)
-
-### **2. Stats_Across_Cells**
-To explore the distribution and structure of chromatin accessibility across immune cell types, we performed preliminary statistical analyses on the unfiltered ATAC-seq dataset. This included computing summary statistics and visualizing patterns using methods like bar plots. However, these initial results lacked biological clarity and interpretability. Based on these limitations, we later decided to filter and clean the ATAC dataset (the process documented in the first notebook) to enable more meaningful downstream analyses.
-
-### **3. Stats_Across_Peaks**
-Descriptive statistics of cell types across ATAC-seq peaks.
-
-### **4. qc_vs_signal**
-This notebook assessed the quality of the unfiltered ATAC-seq dataset by investigating potential correlations between signal intensity and various QC metrics (e.g. number of fragments, duplication rate). Overall data quality appeared good and we found little to no correlation between ATAC signal and QC metrics. 
-
-### **5. tss_distance parts 1 & 2**
-i dont think we should hand in this notebook, the reason i cannot delete this is because i did this one first and the first part worked perfectly, and we later used a file that we extracted from that code somewhere else so it has to stay.... i tried copying the new notebook into this one but it did not work (the code)
-
-### **5. TSS distance New**
-In this notebook we computed each peak’s distance to its nearest TSS, plotted the distance distribution, merged in mean ATAC signal, and assesed & plot  the signal–distance relationship using pearson.
-
-### **6. Signal comparison**
-This notebook represents an early attempt to classify regulatory elements as promoters or enhancers based solely on their distance to the transcription start site (TSS). Although we were aware that such a naive distance-based classification would likely be insufficient, this trial allowed us to explore the feasibility of this approach. The method was not robust or conclusive and ultimately was not used in downstream analyses.
-
-### **7. ATAC Clustering Analysis**
-This notebook contains the main ATAC-seq clustering analysis, performed on the filtered dataset. We reduced dimensionality using PCA, UMAP, and t-SNE, and visualized the accessibility profiles across immune cell types. Clustering patterns were inspected to assess whether related cell types (specifically, progenitor, αβ T cells, activated T cells) group together based on their chromatin accessibility. This analysis directly addressed our goal of defining similarities and differences in chromatin landscapes between cell types.
-
-
-### **8. Gene-expression clustering week 3**
-This notebook mirrors the ATAC-seq clustering approach, but applied to RNA-seq data. 
-
-### **9. Compare atac rna**
-In this notebook, we directly compared ATAC-seq and RNA-seq clustering results by aligning the dimensionality reduction plots (PCA, UMAP, t-SNE) of both datasets side by side. We matched and renamed cell types across datasets to unify labels and enable visual comparison. The aim was to assess whether chromatin accessibility and gene expression reflect similar relationships between immune cell types, and to what extent their clustering patterns overlap or diverge.
-
-### **10. abT Tact gene clusters**
-gene ontology but im not sure how to explain this 
-
-### **11. CRE location and expression correlation**
-This notebook explores the relationship between chromatin accessibility at cis-regulatory elements (CREs) and gene expression, with a focus on the distance to the transcription start site (TSS). We included both upstream and downstream regions in the correlation analysis to test how proximity and position relative to the TSS influence the association strength. The goal was to gain insight into spatial trends that might inform further CRE-gene linking strategies.
-
-the rest idk rn 
-### **12. CRE location counts (TBD)**
-### **13. Regression model (TBD)**
-### **4. Regression model (part 2) *about to be pushed* (TBD)**
+The notebooks used in this project can be found in the appendix section. 
 
 
 ## 5. Results
@@ -316,94 +190,132 @@ Although these clusters don't completely reproduce known relationships between c
 
 Take cluster 1, for example. It includes all progenitor cells and the two first pre-T cells that appear in the differentiation process. The chromatin and transcriptional profiles here are distinct enough to separate these cell types into the same cluster.
 
-The Regression Model 
 
 
-**Figure: Distribution of R² values across genes**  
-*Notebook: `regression_model`*  
+### **5.4 The Regression Model**
+
+<img src="plots/R2_distr.png" alt="R² distribution" width="500"/>
+
+**Figure 10: Distribution of R² values across genes**
+**Notebook: regression\_model**
+
 This plot shows how much of the gene expression variance is explained by the CRE signals per gene. A considerable number of genes show low R² (poorly explained), while the rest are fairly evenly distributed, with the median R² around 0.44.
 
-Comparing the Regression Model to Pure Association by Correlation
 
 
-**Figure: Single-peak correlation vs. multivariate R²**  
-*Notebook: `regression_vs_correlation`*  
+### **Comparison to Correlation-Based Approaches**
+
+<img src="plots/single-peak_correlation.png" alt="Single peak correlation vs regression" width="500"/>
+
+**Figure 11: Single-peak correlation vs. multivariate R²**
+**Notebook: regression\_vs\_correlation**
+
 This plot compares each gene’s maximum absolute Pearson correlation with its multivariate R² from the Lasso model. Most genes follow a general trend—higher max |r| leads to higher R²—but many lie above the r² curve, indicating added predictive power from combining multiple peaks. Others fall below it, where Lasso likely rejected spurious correlations. This highlights the benefit of multivariate modeling beyond simple associations.
 
-Enhancers Promoters
-CREs were assigned a functional role based on their regression coefficient sign and proximity to the TSS in gene-peak pairs with high model performance (R² > 0.7).
 
 
+### **Effect Sizes by CRE Role and Distance**
 
+<img src="plots/activators_repressors.png" alt="Effect size vs. distance to TSS" width="500"/>
 
-**Figure: Regression coefficients vs. distance to TSS**  
-**Notebook: enhancers_promoters_regression**
+**Figure 12: Regression coefficients vs. distance to TSS**
+**Notebook: enhancers\_promoters\_regression**
 
 Activators and promoters show positive effects closer to the TSS, while repressors exert negative effects across a broader distance range.
 
 
 
+### **CRE Distance Summary Statistics**
+
+**Table 1: Summary statistics of CRE distances to TSS**
+**Notebook: enhancers\_promoters\_regression**
+
+| Role      | Count  | Min | 25% | Median | 75%    | Max    |
+| --------- | ------ | --- | --- | ------ | ------ | ------ |
+| Activator | 13,685 | 1   | 418 | 4,448  | 15,948 | 99,778 |
+| Promoter  | 2,036  | 0   | 26  | 53.5   | 108    | 983    |
+| Repressor | 13,025 | 0   | 126 | 1,303  | 11,544 | 99,880 |
+
+Repressing CREs are generally more distal than promoters but more proximal than activating CREs.
 
 
 
-Are there differences between activating and repressing CREs?
+### **Genes Grouped by Strongest CRE Role**
 
-**Figure: Summary statistics of CRE distances to TSS**  
-**Notebook: enhancers_promoters_regression**
+<img src="plots/genes_strongest_CRE.png" alt="Genes by strongest CRE role" width="500"/>
 
-| Role      | Count   | Min | 25%  | Median | 75%   | Max     |
-|-----------|---------|-----|------|--------|-------|---------|
-| Activator | 13,685  | 1   | 418  | 4,448  | 15,948 | 99,778  |
-| Promoter  | 2,036   | 0   | 26   | 53.5   | 108    | 983     |
-| Repressor | 13,025  | 0   | 126  | 1,303  | 11,544 | 99,880  |
-
-
-So **repressing CREs** are generally more distal than promoters but more proximal than activating CREs.
-
-
-
-
- How many genes are mainly regulated by repressing CREs, and can promoters act through repression? 
-
-
-**Figure: Genes grouped by dominant CRE role**  
-**Notebook: enhancers_promoters_regression**
+**Figure 13: Genes grouped by dominant CRE role**
+**Notebook: enhancers\_promoters\_regression**
 
 Most genes are primarily regulated by activating elements, but a substantial fraction are mainly repressed. A small number are primarily driven by promoter elements, some of which act as repressors.
 
 
-Are there CREs that are repressing for one gene but activating for another gene?
+
+### **Context-Dependent Regulatory Behavior**
 
 We found that **2623 out of 21,249 CREs (12.3%)** act as **activators for some genes but repressors for others**, highlighting the **context-dependent nature** of regulatory elements.
 
 
-1.ii. d Are intronic enhancers different from enhancers outside the transcript.
 
-| Location    | Count  | % of Enhancers | Activator Fraction | Repressor Fraction | Mean Coefficient | Median Coefficient | Max Coefficient |
-|-------------|--------|----------------|---------------------|---------------------|------------------|--------------------|-----------------|
-| Intergenic  | 21,076 | 78.9%          | 0.486               | 0.514               | 3.85             | 0.87               | 342.0           |
-| Intronic    | 5,634  | 21.1%          | 0.611               | 0.389               | 4.69             | 1.40               | 329.0           |
+### **Intronic vs. Intergenic Enhancers**
 
-**Figure:** Overview of enhancer-type CREs by genomic location. Most enhancers are intergenic, but intronic ones are more likely to act as activators and have slightly stronger regression coefficients on average.
-**Notebook: enhancers_promoters_regression**
+**Table 2: Overview of enhancer-type CREs by genomic location**
+**Notebook: enhancers\_promoters\_regression**
 
-Can promoters act through repression?
+| Location   | Count  | % of Enhancers | Activator Fraction | Repressor Fraction | Mean Coefficient | Median Coefficient | Max Coefficient |
+| ---------- | ------ | -------------- | ------------------ | ------------------ | ---------------- | ------------------ | --------------- |
+| Intergenic | 21,076 | 78.9%          | 0.486              | 0.514              | 3.85             | 0.87               | 342.0           |
+| Intronic   | 5,634  | 21.1%          | 0.611              | 0.389              | 4.69             | 1.40               | 329.0           |
+
+Most enhancers are intergenic, but intronic ones are more likely to act as activators and have slightly stronger regression coefficients on average.
+
+
+
+### **Promoters Acting Through Repression**
+
 We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient greater than the strongest repressor** linked to that gene.
-**Notebook: enhancers_promoters_regression**
+**Notebook: enhancers\_promoters\_regression**
 
 
 
+### **Effect Size Distributions by Location**
+
+<img src="plots/intronic_intergenic.png" alt="CRE distribution by location and role" width="500"/>
+
+**Figure 14: Distribution of absolute effect sizes (|β|) across CREs by location**
+**Notebook: enhancers\_promoters\_regression**
+
+Intronic and intergenic enhancers show similar overall effect size distributions, with slightly higher median |β| in intronic elements.
 
 
+### **6. Discussion**
 
-Figure: Distribution of absolute effect sizes (|β|) across CREs by location.
-Intronic and intergenic enhancers show similar overall effect size distributions, with slightly higher median |β| in intronic elements. 
-**Notebook: enhancers_promoters_regression**
-
+We combined ATAC-seq and RNA-seq data to explore how cis-regulatory elements (CREs) shape immune cell identity across related immune cell lineages of *Mus musculus*. Our goal was to understand the regulatory logic behind gene expression differences in abT and T.act cells.
 
 
-## 6. Discussion
+**Main findings:**
 
+* Chromatin accessibility near TSS correlates with strong gene regulation.
+* Regression modeling allowed classification of CREs as activators, repressors, or promoters.
+* Most genes are driven by activators, but some are predominantly repressed.
+* A subset of CREs can act as both activators and repressors depending on the gene.
+* Functional clustering reflected known biology: general functions in abT, more specific immune roles in T.act.
+
+---
+
+**Weaknesses:**
+
+* Strict peak filtering was needed due to computational limits and weak early signals.
+* Some early methods (e.g. naïve promoter classification) were not robust.
+* Cluster resolution may have been too coarse, requiring later gene filtering.
+
+---
+
+**Conclusion:**
+
+Cis-regulatory landscapes differ subtly but meaningfully between related immune cell types. Our analysis shows that dynamic CRE activity programs cell fate decisions, linking chromatin state to the emergence of specialized gene expression profiles.
+
+Future studies could integrate transcription factor motif analysis or single-cell resolution to uncover the upstream regulators driving these patterns and better resolve CRE behavior across developmental transitions. Moreover, this approach has offered promising results when it comes to distinguishing different types of immune-cell cancer (Corces et al., 2018). This in turn could further help study the underlying causes of abnormal gene expression and disrupted differentiation in transformed cells.
 
 
 ## 7. Resources 
@@ -411,3 +323,49 @@ Intronic and intergenic enhancers show similar overall effect size distributions
 1. Yoshida, H., et al. (2019). The cis-Regulatory Atlas of the Mouse Immune System. Cell, 176(4), 897–912.e20.
 
 2. — Zhang, Y., et al. (2023). *T cell development and differentiation: insights from single-cell transcriptomics.* *Signal Transduction and Targeted Therapy*, **8**, 191. [https://doi.org/10.1038/s41392-023-01471-y](https://doi.org/10.1038/s41392-023-01471-y)
+
+## 8. Appendix
+
+**All Notebooks Used & What Each Contain:**
+
+### **1. ATAC-seq wrangling**
+This notebook prepares the ATAC-seq dataset for downstream analysis. It includes cell type annotation, filtering low-quality cells, normalization of signal values, and initial visual checks. The cleaned dataset serves as the foundation for all ATAC-based analyses in later steps. Note that this filtering was done not as the first task, but rather later on in the project as we saw multiple reasons to do the filtering this way, and later on we reran certain analyses. (see Results and Discussion -here we need to specify where exactly we talked ab this-)
+
+### **2. Stats_Across_Cells**
+To explore the distribution and structure of chromatin accessibility across immune cell types, we performed preliminary statistical analyses on the unfiltered ATAC-seq dataset. This included computing summary statistics and visualizing patterns using methods like bar plots. However, these initial results lacked biological clarity and interpretability. Based on these limitations, we later decided to filter and clean the ATAC dataset (the process documented in the first notebook) to enable more meaningful downstream analyses.
+
+### **3. Stats_Across_Peaks**
+Descriptive statistics of cell types across ATAC-seq peaks.
+
+### **4. qc_vs_signal**
+This notebook assessed the quality of the unfiltered ATAC-seq dataset by investigating potential correlations between signal intensity and various QC metrics (e.g. number of fragments, duplication rate). Overall data quality appeared good and we found little to no correlation between ATAC signal and QC metrics. 
+
+### **5. tss_distance parts 1 & 2**
+i dont think we should hand in this notebook, the reason i cannot delete this is because i did this one first and the first part worked perfectly, and we later used a file that we extracted from that code somewhere else so it has to stay.... i tried copying the new notebook into this one but it did not work (the code)
+
+### **5. TSS distance New**
+In this notebook we computed each peak’s distance to its nearest TSS, plotted the distance distribution, merged in mean ATAC signal, and assesed & plot  the signal–distance relationship using pearson.
+
+### **6. Signal comparison**
+This notebook represents an early attempt to classify regulatory elements as promoters or enhancers based solely on their distance to the transcription start site (TSS). Although we were aware that such a naive distance-based classification would likely be insufficient, this trial allowed us to explore the feasibility of this approach. The method was not robust or conclusive and ultimately was not used in downstream analyses.
+
+### **7. ATAC Clustering Analysis**
+This notebook contains the main ATAC-seq clustering analysis, performed on the filtered dataset. We reduced dimensionality using PCA, UMAP, and t-SNE, and visualized the accessibility profiles across immune cell types. Clustering patterns were inspected to assess whether related cell types (specifically, progenitor, αβ T cells, activated T cells) group together based on their chromatin accessibility. This analysis directly addressed our goal of defining similarities and differences in chromatin landscapes between cell types.
+
+
+### **8. Gene-expression clustering week 3**
+This notebook mirrors the ATAC-seq clustering approach, but applied to RNA-seq data. 
+
+### **9. Compare atac rna**
+In this notebook, we directly compared ATAC-seq and RNA-seq clustering results by aligning the dimensionality reduction plots (PCA, UMAP, t-SNE) of both datasets side by side. We matched and renamed cell types across datasets to unify labels and enable visual comparison. The aim was to assess whether chromatin accessibility and gene expression reflect similar relationships between immune cell types, and to what extent their clustering patterns overlap or diverge.
+
+### **10. abT Tact gene clusters**
+gene ontology but im not sure how to explain this 
+
+### **11. CRE location and expression correlation**
+This notebook explores the relationship between chromatin accessibility at cis-regulatory elements (CREs) and gene expression, with a focus on the distance to the transcription start site (TSS). We included both upstream and downstream regions in the correlation analysis to test how proximity and position relative to the TSS influence the association strength. The goal was to gain insight into spatial trends that might inform further CRE-gene linking strategies.
+
+the rest idk rn 
+### **12. CRE location counts (TBD)**
+### **13. Regression model (TBD)**
+### **4. Regression model (part 2) *about to be pushed* (TBD)**
