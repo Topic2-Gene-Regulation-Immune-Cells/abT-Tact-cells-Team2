@@ -119,13 +119,28 @@ The notebooks used in this project can be found in the appendix section.
 
 
 ## 5. Results
-- Basic statistics and QC metrics
+
+### **5.0 Initial Signal Assessment**
+
+We assessed how chromatin signal varies across cell types and whether technical metrics like sequencing depth or number of input cells bias the data. While signal magnitude varied moderately across samples, no major outliers or systematic QC effects were observed. No filtering was applied based on these statistics.
+
+<div style="display: flex; gap: 10px;">
+  <img src="plots/persample.png" alt="Total signal per sample" width="350"/>
+  <img src="plots/persamplemed.png" alt="Median signal per sample" width="350"/>
+  <img src="plots/persampleCV.png" alt="Signal variability per sample" width="350"/>
+</div>
+
+**Figure 4: Total, median, and variability (CV) of signal across samples.**
+
+Each metric shows consistent global trends with no samples flagged for removal.
+
+**Notebook: Stat\_ATAC / qc\_vs\_signal**
 
 <img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="400"/>
  
-**Figure 4.** *Variance vs. -log10P for ATAC-seq peaks*  
-Notebook: ATAC_seq_wrangling
+**Figure 5.** *Variance vs. -log10P for ATAC-seq peaks*  
 
+**Notebook**: ATAC_seq_wrangling
 
 ### **5.1 Filtered Out Genes Based On Variance and Confidence Score**
 <br>
@@ -139,14 +154,14 @@ Distribution of peak distances and corresponding ATAC signal intensity
 
 <img src="./plots/ReadMe/2_TSS_distance.png" alt="Hexbin plot of signal vs signal" width="600"/>
 
-**Figure 5.** *Distribution of peaks by distance to the nearest TSS*  
+**Figure 6.** *Distribution of peaks by distance to the nearest TSS*  
 Notebook: TSS_distance
 
 <br> We analyzed the genomic distribution of ATAC-seq peaks based on their distance to the nearest transcription start site (TSS). The largest proportion of peaks is found either very close to the TSS (0–500 bp) or far away (>20 kb), with ~28% and ~36% respectively.
 
 <img src="./plots/ReadMe/3_MedianSignal_vs_TSSDistance.png" alt="Median ATAC signal by distance to TSS" width="600"/>
 
-**Figure 6.** *Binned median ATAC signal by distance to TSS*  
+**Figure 7.** *Binned median ATAC signal by distance to TSS*  
 Notebook: TSS_distance 
 
 We also examined how the median ATAC signal varies with distance. Peaks located near the TSS show the highest accessibility signal, which rapidly decreases with increasing distance.
@@ -158,11 +173,11 @@ As a way of analyzing how the chromatin landscape and gene expression pattern sh
 
 <img src="image\README\chrom_acc_sim_matrix.png" width="600"/>
 
-**Figure 7.** *Heatmap of pairwise Euclidean distances between genome-wide chromatin accessibility profiles for 29 cell lineages.*
+**Figure 8.** *Heatmap of pairwise Euclidean distances between genome-wide chromatin accessibility profiles for 29 cell lineages.*
 
 <img src="image\README\gen_exp_sim_matrix.png" width="600"/>
 
-**Figure 8.** *Heatmap of pairwise Euclidean distances between gene expression profiles for 29 cell lineages.*
+**Figure 9.** *Heatmap of pairwise Euclidean distances between gene expression profiles for 29 cell lineages.*
 
 The spearman's rank correlation coefficient between these two matrices is ρ = 0.637 (p = 1.3e-47), which means cell‐pairs that are close in chromatin accessibility tend also to be close in gene expression. 
 
@@ -172,7 +187,7 @@ We used the elbow method to determine the optimal amount of clusters: k = 5
 
 <img src="image\README\clustering_umap_atac_rna.png" width="600"/>
 
-**Figure 9.** *UMAP of integrated RNA and ATAC data showcasing five distinct cell-type clusters.*
+**Figure 10.** *UMAP of integrated RNA and ATAC data showcasing five distinct cell-type clusters.*
 
 This clustering subdivided our cells into the following subgroups:
 
@@ -196,7 +211,7 @@ Take cluster 1, for example. It includes all progenitor cells and the two first 
 
 <img src="plots/R2_distr.png" alt="R² distribution" width="500"/>
 
-**Figure 10: Distribution of R² values across genes**
+**Figure 11: Distribution of R² values across genes**
 **Notebook: regression\_model**
 
 This plot shows how much of the gene expression variance is explained by the CRE signals per gene. A considerable number of genes show low R² (poorly explained), while the rest are fairly evenly distributed, with the median R² around 0.44.
@@ -207,7 +222,7 @@ This plot shows how much of the gene expression variance is explained by the CRE
 
 <img src="plots/single-peak_correlation.png" alt="Single peak correlation vs regression" width="500"/>
 
-**Figure 11: Single-peak correlation vs. multivariate R²**
+**Figure 12: Single-peak correlation vs. multivariate R²**
 **Notebook: regression\_vs\_correlation**
 
 This plot compares each gene’s maximum absolute Pearson correlation with its multivariate R² from the Lasso model. Most genes follow a general trend—higher max |r| leads to higher R²—but many lie above the r² curve, indicating added predictive power from combining multiple peaks. Others fall below it, where Lasso likely rejected spurious correlations. This highlights the benefit of multivariate modeling beyond simple associations.
@@ -218,7 +233,7 @@ This plot compares each gene’s maximum absolute Pearson correlation with its m
 
 <img src="plots/activators_repressors.png" alt="Effect size vs. distance to TSS" width="500"/>
 
-**Figure 12: Regression coefficients vs. distance to TSS**
+**Figure 13: Regression coefficients vs. distance to TSS**
 **Notebook: enhancers\_promoters\_regression**
 
 Activators and promoters show positive effects closer to the TSS, while repressors exert negative effects across a broader distance range.
@@ -244,7 +259,7 @@ Repressing CREs are generally more distal than promoters but more proximal than 
 
 <img src="plots/genes_strongest_CRE.png" alt="Genes by strongest CRE role" width="500"/>
 
-**Figure 13: Genes grouped by dominant CRE role**
+**Figure 14: Genes grouped by dominant CRE role**
 **Notebook: enhancers\_promoters\_regression**
 
 Most genes are primarily regulated by activating elements, but a substantial fraction are mainly repressed. A small number are primarily driven by promoter elements, some of which act as repressors.
@@ -282,7 +297,7 @@ We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient grea
 
 <img src="plots/intronic_intergenic.png" alt="CRE distribution by location and role" width="500"/>
 
-**Figure 14: Distribution of absolute effect sizes (|β|) across CREs by location**
+**Figure 15: Distribution of absolute effect sizes (|β|) across CREs by location**
 **Notebook: enhancers\_promoters\_regression**
 
 Intronic and intergenic enhancers show similar overall effect size distributions, with slightly higher median |β| in intronic elements.
