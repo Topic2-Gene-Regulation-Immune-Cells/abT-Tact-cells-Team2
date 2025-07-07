@@ -8,7 +8,50 @@
 
 # 1. Overview
 
-# 2. Project Description / Introduction
+
+
+<details>
+  <summary><strong>Table of Contents</strong></summary>
+
+
+  - [2. Introduction](#2-introduction)  
+    - [2.1 Immune Cell Types: αβ T Cells & Activated T Cells](#21-immune-cell-types-αβ-t-cells--activated-t-cells)  
+      - [αβ T Cells (abT)](#αβ-t-cells-abt)  
+      - [Activated T Cells (T.act)](#activated-t-cells-tact)  
+    - [2.2 ATAC-seq and RNA-seq: Purpose and Relevance](#22-atac-seq-and-rna-seq-purpose-and-relevance)  
+      - [RNA-seq](#rna-seq)  
+      - [ATAC-seq](#atac-seq)  
+    - [2.3 Research Goals](#23-research-goals)
+  - [3. Dependencies](#3-dependencies)
+  - [4. Project Organization](#4-project-organization)
+  - [5. Results](#5-results)  
+    - [5.0 Initial Signal Assessment](#50-initial-signal-assessment)  
+    - [5.1 Filtered Out Genes Based On Variance and Confidence Score](#51-filtered-out-genes-based-on-variance-and-confidence-score)  
+    - [5.2 TSS Distance Based Characterization of Peaks](#52-tss-distance-based-characterization-of-peaks)  
+    - [5.3 Clustering](#53-clustering)  
+      - [Similarity Matrices](#similarity-matrices)  
+      - [Dimensionality Reduction and Clustering](#dimensionality-reduction-and-clustering)  
+    - [5.4 The Regression Model](#54-the-regression-model)
+        - [Comparison to Correlation-Based Approaches](#comparison-to-correlation-based-approaches)  
+        - [Effect Sizes by CRE Role and Distance](#effect-sizes-by-cre-role-and-distance)  
+        - [CRE Distance Summary Statistics](#cre-distance-summary-statistics)  
+        - [Genes Grouped by Strongest CRE Role](#genes-grouped-by-strongest-cre-role)  
+        - [Context-Dependent Regulatory Behavior](#context-dependent-regulatory-behavior)  
+        - [Intronic vs. Intergenic Enhancers](#intronic-vs-intergenic-enhancers)  
+        - [Promoters Acting Through Repression](#promoters-acting-through-repression)  
+        - [Effect Size Distributions by Location](#effect-size-distributions-by-location)  
+       - [Gene Ontology Analysis](#gene-ontology-analysis)  
+       - [Impact of Including Effect Direction on CRE Clustering](#impact-of-including-effect-direction-on-cre-clustering)
+  - [6. Discussion](#6-discussion)
+  - [7. Resources](#7-resources)
+  - [8. Appendix](#8-appendix)  
+
+
+</details>
+
+<br>
+
+# 2. Introduction
 ## **2.1 Immune Cell Types: αβ T Cells & Activated T Cells**
 
 <p align="justify">
@@ -112,7 +155,7 @@ The main idea is combining ATAC-seq and RNA-seq to allow us to reconstruct regul
 
 
 
-## **2.4 Research Goals**
+## **2.3 Research Goals**
 
 **1.** Characterizing the chromatin landscape across immune cell lineages.
 
@@ -163,7 +206,7 @@ Each metric shows consistent global trends with no samples flagged for removal.
 
 ## **5.1 Filtered Out Genes Based On Variance and Confidence Score**
 
-<img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="400"/>
+<img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="600"/>
  
 **Figure 5.** *Variance vs. -log10P for ATAC-seq peaks*  
 **Notebook: ATAC-seq_filtering**
@@ -261,7 +304,7 @@ Take cluster 1, for example. It includes all progenitor cells and the two first 
 
 ## **5.4 The Regression Model**
 
-<img src="plots/R2_distr.png" alt="R² distribution" width="500"/>
+<img src="plots/R2_distr.png" alt="R² distribution" width="600"/>
 
 **Figure 11.** *Distribution of R² values across genes*
 <br>
@@ -275,7 +318,7 @@ This plot shows how much of the gene expression variance is explained by the CRE
 
 ### **Comparison to Correlation-Based Approaches**
 
-<img src="plots/single-peak_correlation.png" alt="Single peak correlation vs regression" width="500"/>
+<img src="plots/single-peak_correlation.png" alt="Single peak correlation vs regression" width="600"/>
 
 **Figure 12.** *Single-peak correlation vs. multivariate R²*
 <br>
@@ -289,9 +332,9 @@ This plot compares each gene’s maximum absolute Pearson correlation with its m
 
 ### **Effect Sizes by CRE Role and Distance**
 
-<img src="plots/activators_repressors.png" alt="Effect size vs. distance to TSS" width="500"/>
+<img src="plots/activators_repressors.png" alt="Effect size vs. distance to TSS" width="600"/>
 
-**Figure 13:** *Regression coefficients vs. distance to TSS*
+**Figure 13.** *Regression coefficients vs. distance to TSS*
 <br>
 **Notebook: enhancers\_promoters\_regression**
 
@@ -316,7 +359,7 @@ Repressing CREs are generally more distal than promoters but more proximal than 
 
 ### **Genes Grouped by Strongest CRE Role**
 
-<img src="plots/genes_strongest_CRE.png" alt="Genes by strongest CRE role" width="500"/>
+<img src="plots/genes_strongest_CRE.png" alt="Genes by strongest CRE role" width="600"/>
 
 **Figure 14.** *Genes grouped by dominant CRE role* <br>
 **Notebook: enhancers\_promoters\_regression**
@@ -357,9 +400,9 @@ We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient grea
 
 ### **Effect Size Distributions by Location**
 
-<img src="plots/intronic_intergenic.png" alt="CRE distribution by location and role" width="500"/>
+<img src="plots/intronic_intergenic.png" alt="CRE distribution by location and role" width="600"/>
 
-**Figure 15: Distribution of absolute effect sizes (|β|) across CREs by location**
+**Figure 15.** *Distribution of absolute effect sizes (|β|) across CREs by location*<br>
 **Notebook: enhancers\_promoters\_regression**
 
 <p align="justify">
@@ -371,9 +414,9 @@ Intronic and intergenic enhancers show similar overall effect size distributions
 Using predefined gene clusters based on the RNAseq, we then assigned specific gene groups to either abT or T.act cells by looking at their mean expression. This allowed us to run a gene ontology (GO) term enrichment, in order to define the biological significance of the assigned genes. At first, the terms contained structures and processes that were too general. After filtering, abT gene clusters were still too general, however, the T.act cluster mirrored very specific aspects of its corresponding cell types - from abT cell activation to innate immune regulation and PPR signaling (Fig. 16). Therefore, gene ontology showed that RNAseq clustering, albeit not completely refined, did manage to describe important biological roles.
 </p>
 
-<img src="image\README\GO_terms_Tact.png" alt="CRE distribution by location and role" width="500"/>
+<img src="image\README\GO_terms_Tact.png" alt="CRE distribution by location and role" width="600"/>
 
-**Figure 16:** *Top gene ontology terms for T.act cells after filtering*
+**Figure 16.** *Top gene ontology terms for T.act cells after filtering*
 <br> 
 **Notebook: abT_Tact_gene_clusters**
 
@@ -381,7 +424,7 @@ Using predefined gene clusters based on the RNAseq, we then assigned specific ge
 <p align="justify">
 Finally, we compared how much the CRE clustering on peak accessibility changed when we included the results of our regression model classifying peaks into activators or repressors. For that purpose, we calculated the mean value of peak accessibility across all cell types and created a directional and a non-directional matrix. We performed hierarchical clustering on both and then overlaped the clusters in a heatmap for comparison. 
 </p>
-<img src="image\README\overlap_clustering_CREs.png" alt="CRE distribution by location and role" width="500"/>
+<img src="image\README\overlap_clustering_CREs.png" alt="CRE distribution by location and role" width="600"/>
 
 **Figure 17.** *Overlap non-directional and directional clustering* <br>
 **Notebook: ATAC_Clustering_Analysis**
@@ -436,74 +479,4 @@ Future studies could integrate transcription factor motif analysis or single-cel
 
 ## 8. Appendix
 
-**All Notebooks Used & What Each Contain:**
-
-### **1. ATAC-seq_filtering**
-<p align="justify">
-Processes the raw ATAC-seq dataset by annotating cell types, filtering low-quality cells, and preparing it for downstream analysis through basic visual and statistical checks.
-</p>
-
-### **2. Stats_Across_Cells**
-<p align="justify">
-Performs preliminary statistical analysis on unfiltered ATAC-seq data across immune cell types to summarize accessibility distributions. These early results informed later filtering decisions.
-</p>
-
-### **3. Stats_Across_Peaks**
-<p align="justify">
-Computes descriptive statistics of accessibility across ATAC-seq peaks and summarizes cell type-specific patterns.
-</p>
-
-### **4. qc_vs_signal**
-<p align="justify">
-Assesses data quality by analyzing correlations between ATAC signal and quality control metrics. Finds minimal correlation, suggesting overall good data quality.
-</p>
-
-### **5. tss_distance_part1** and **tss_distance_part2**
-<p align="justify">
-In these notebook we computed each peak’s distance to its nearest TSS, plotted the distance distribution, merged in mean ATAC signal, and assesed & plotted the signal–distance relationship using pearson.
-</p>
-
-### **6. signal_comparison**
-<p align="justify">
-This notebook represents an early attempt to classify regulatory elements as promoters or enhancers based solely on their distance to the transcription start site (TSS). Although we were aware that such a naive distance-based classification would likely be insufficient, this trial allowed us to explore the feasibility of this approach. The method was not robust or conclusive and ultimately was not used in downstream analyses.
-</p>
-
-### **7. ATAC_Clustering_Analysis**
-<p align="justify">
-This notebook contains the main ATAC-seq clustering analysis, performed on the filtered dataset. We reduced dimensionality using PCA, UMAP, and t-SNE, and visualized the accessibility profiles across immune cell types. Clustering patterns were inspected to assess whether related cell types (specifically, progenitor, αβ T cells, activated T cells) group together based on their chromatin accessibility. This analysis directly addressed our goal of defining similarities and differences in chromatin landscapes between cell types.
-</p>
-
-
-### **8. gene_expression_clustering**
-This notebook mirrors the ATAC-seq clustering approach, but applied to RNA-seq data. 
-
-### **9. comparison_ATAC_RNA**
-</p align="justify">
-In this notebook, we directly compared ATAC-seq and RNA-seq clustering results by aligning the dimensionality reduction plots (PCA, UMAP, t-SNE) of both datasets side by side. We matched and renamed cell types across datasets to unify labels and enable visual comparison. The aim was to assess whether chromatin accessibility and gene expression reflect similar relationships between immune cell types, and to what extent their clustering patterns overlap or diverge.
-</p>
-
-### **10. abT_Tact_gene_clusters**
-<p align="justify">
-Clusters of high-variance genes are assigned to αβ T or activated T cells based on mean expression, followed by GO enrichment to interpret their biological roles. Initial GO terms were broad, so results were refined by focusing on biological processes, selecting the most significant genes, and filtering out general terms.
-</p>
-
-### **11. regression_model**
-<p align="justify">
-This notebook implements a regression-based model to identify potential regulatory relationships between chromatin accessibility at peaks (CREs) and gene expression. Using LASSO regression, the model links each gene to its nearby peaks and selects only those with non-zero coefficients, which may have a regulatory influence. We computed R² scores to estimate how well each gene's expression is explained by nearby CREs, enabling downstream analysis of regulatory strength across genes.
-</p>
-
-### **12. regression_vs_correlation**
-<p align="justify">
-This notebook compares the predictive power of correlation-based versus regression-based peak–gene associations. After filtering the peak–gene links for proximity and data availability, we visualized and quantified the overlap between methods. Additionally, we explored the direction of effect (positive/negative) of each CRE, separated them into putative activators and repressors, and analyzed whether clusters of peaks correlate with clusters of genes—potentially revealing coordinated regulatory programs.
-</p>
-
-### **13. enhancers_promoters_regression.ipynb**
-<p align="justify">
-This notebook investigates whether promoters and enhancers differ in their influence on gene expression using the results from LASSO regression. Peaks were annotated as promoters or enhancers based on their genomic distance to transcription start sites. We compared the regression coefficients and R² values between the two groups, examined the number of target genes per CRE type, and visualized distributions to assess whether regulatory strength differs between enhancers and promoters. This analysis helped characterize the functional roles of different cis-regulatory element classes.
-<p/>
-
-### **14. CREs_per_cell_lineage**
-<p align="justify">
-This notebook quantifies how many unique cis-regulatory elements (CREs) regulate genes in each immune cell lineage. By combining the LASSO regression output with cell-type-specific gene expression, we identified peaks contributing to gene regulation in either abT or T.act cells. We then compared the distributions of these lineage-specific CREs to assess whether distinct sets of regulatory elements are used in different T cell lineages.
-</p>
-
+A brief description of each Jupyter Notebook created during this project can be found in [Notebooks_Appendix.ipynb](Notebooks_Appendix.ipynb).
