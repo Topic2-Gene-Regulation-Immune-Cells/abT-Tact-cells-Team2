@@ -106,7 +106,7 @@ Once stimulated by antigen, naive αβ T cells become activated and acquire effe
 
 ---
 
-### **2.2 ATAC-seq and RNA-seq: Purpose and Relevance**
+## **2.2 ATAC-seq and RNA-seq: Purpose and Relevance**
 
 <p align="justify">
 To understand how abT and Tact cells regulate gene expression, we use data from two complementary technologies:
