@@ -278,35 +278,43 @@ Notebook: TSS_distance
 We also examined how the median ATAC signal varies with distance. Peaks located near the TSS show the highest accessibility signal, which rapidly decreases with increasing distance.
 
 ### **5.3 Clustering**<br>
-As a way of analyzing how the chromatin landscape and gene expression pattern shape cell lines throughout differentiation, we ran a clustering analysis on our cell types.<br>
+As a way of analyzing how the chromatin landscape and gene expression pattern shape cell lines throughout differentiation, we plotted similarity matrices and ran a clustering analysis on our cell types.<br>
+
+#### **5.3.1: Similarity Matrices**
+
+<img src="image\README\chrom_acc_sim_matrix.png" width="600"/>
+
+**Figure 7.** *Heatmap of pairwise Euclidean distances between genome-wide chromatin accessibility profiles for 29 cell lineages.*
+
+<img src="image\README\gen_exp_sim_matrix.png" width="600"/>
+
+**Figure 8.** *Heatmap of pairwise Euclidean distances between gene expression profiles for 29 cell lineages.*
+
+The spearman's rank correlation coefficient between these two matrices is ρ = 0.637 (p = 1.3e-47), which means cell‐pairs that are close in chromatin accessibility tend also to be close in gene expression. 
+
+#### **5.3.2: Dimentionality Reduction and Clustering**
+
 We used the elbow method to determine the optimal amount of clusters: k = 5
 
 <img src="image\README\clustering_umap_atac_rna.png" width="600"/>
 
+**Figure 9.** *UMAP of integrated RNA and ATAC data showcasing five distinct cell-type clusters.*
+
 This clustering subdivided our cells into the following subgroups:
-
-
 
 | 0 | 1 | 2 | 3 | 4 |
 |:--|:--|:--|:--|:--|
 | <ul><li>T.4.Th</li><li>T.8.Th</li><li>T.4.Nve.Sp</li><li>T.4.Nve.Fem.Sp</li><li>T.4.Sp.aCD3+CD40.18hr</li><li>T.8.Nve.Sp</li><li>Treg.4.25hi.Sp</li><li>Treg.4.FP3+.Nrplo.Co</li><li>T8.TN.P14.Sp</li><li>T8.Tcm.LCMV.d180.Sp</li><li>T8.Tem.LCMV.d180.Sp</li><li>NKT.Sp</li><li>NKT.Sp.LPS.3hr</li><li>NKT.Sp.LPS.18hr</li><li>NKT.Sp.LPS.3d</li></ul> | <ul><li>LTHSC.34-.BM</li></ul> | <ul><li>preT.DN2b.Th</li><li>preT.DN3.Th</li><li>T.DN4.Th</li><li>T.ISP.Th</li><li>T.DP.Th</li></ul> | <ul><li>preT.DN1.Th</li><li>preT.DN2a.Th</li><li>LTHSC.34+.BM</li><li>STHSC.150-.BM</li><li>MPP4.135+.BM</li></ul> | <ul><li>T8.TE.LCMV.d7.Sp</li><li>T8.MP.LCMV.d7.Sp</li><li>T8.IEL.LCMV.d7.Gut</li></ul> |
 
-
-As a way to compare the clustering to the established division of the cell types into the groups αβ-T, T.act and Progenitor, we ran the clustering with k = 3. The cell types were then subdivided as follows:
+Aiming to compare the clustering result to the established division of the cell types into the groups αβ-T, T.act and Progenitor, we ran the clustering with k = 3. The cell types were then subdivided as follows:
 
 | 0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       | 1                                                                                                                                                                         | 2                                                                                                                                                                                                              |
 |:----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------|:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | <ul><li>T.DP.Th (abT)</li><li>T.4.Th (abT)</li><li>T.8.Th (abT)</li><li>T.4.Nve.Sp (abT)</li><li>T.4.Nve.Fem.Sp (abT)</li><li>T.8.Nve.Sp (abT)</li><li>Treg.4.25hi.Sp (abT)</li><li>T8.TN.P14.Sp (abT)</li><li>T8.Tcm.LCMV.d180.Sp (Tact)</li><li>T8.Tem.LCMV.d180.Sp (Tact)</li><li>NKT.Sp (abT)</li><li>NKT.Sp.LPS.3hr (Tact)</li><li>NKT.Sp.LPS.18hr (Tact)</li><li>NKT.Sp.LPS.3d (Tact)</li></ul> | <ul><li>preT.DN1.Th (abT)</li><li>preT.DN2a.Th (abT)</li><li>LTHSC.34-.BM (Progenitor)</li><li>LTHSC.34+.BM (Progenitor)</li><li>STHSC.150-.BM (Progenitor)</li><li>MPP4.135+.BM (Progenitor)</li></ul> | <ul><li>preT.DN2b.Th (abT)</li><li>preT.DN3.Th (abT)</li><li>T.DN4.Th (abT)</li><li>T.ISP.Th (abT)</li><li>T.4.Sp.aCD3+CD40.18hr (Tact)</li><li>Treg.4.FP3+.Nrplo.Co (abT)</li><li>T8.TE.LCMV.d7.Sp (Tact)</li><li>T8.MP.LCMV.d7.Sp (Tact)</li><li>T8.IEL.LCMV.d7.Gut (Tact)</li></ul> |
 
-Although these clusterings don't completely reproduce known relationships between cells, it does shows us that chromatin landscape and gene expression profiles are key elements in identifying cellular subgroups.
+Although these clusters don't completely reproduce known relationships between cells, it does shows us that chromatin landscape and gene expression profiles are key elements in identifying cellular subgroups.
 
 Take cluster 1, for example. It includes all progenitor cells and the two first pre-T cells that appear in the differentiation process. The chromatin and transcriptional profiles here are distinct enough to separate these cell types into the same cluster.
-
-
-
-
-- Gene clustering and functional annotation
-- Regression analysis and assignment of CREs to specific genes
 
 The Regression Model 
 
