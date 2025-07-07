@@ -473,9 +473,11 @@ Future studies could integrate transcription factor motif analysis or single-cel
 
 1. Yoshida, H., et al. (2019). The cis-Regulatory Atlas of the Mouse Immune System. Cell, 176(4), 897–912.e20.
 
-2. — Zhang, Y., et al. (2023). *T cell development and differentiation: insights from single-cell transcriptomics.* *Signal Transduction and Targeted Therapy*, **8**, 191. [https://doi.org/10.1038/s41392-023-01471-y](https://doi.org/10.1038/s41392-023-01471-y)
+2. Zhang, Y., et al. (2023). *T cell development and differentiation: insights from single-cell transcriptomics.* *Signal Transduction and Targeted Therapy*, **8**, 191.
+   [https://doi.org/10.1038/s41392-023-01471-y](https://doi.org/10.1038/s41392-023-01471-y)
+3. Yan, F., et al. (2020). From reads to insight: a hitchhiker’s guide to ATAC-seq data analysis. Genome Biology, 21(22).
 
-3. Assistance from AI tools was used throughout the project, particularly for code development and refining written formulations.
+4. Assistance from AI tools was used throughout the project, particularly for code development and refining written formulations.
 
 ## 8. Appendix
 
