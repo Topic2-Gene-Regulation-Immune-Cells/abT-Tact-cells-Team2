@@ -8,6 +8,8 @@ dependencies:
   - pip
   - pip:
       - intervaltree
+      - gprofiler-official
+      - wordcloud
   - anndata
   - jupyter
   - numpy
@@ -18,4 +20,9 @@ dependencies:
   - openpyxl
   - git
   - git-lfs
+  - intervaltree
+  - statsmodels
+  - umap-learn
+  - fastcluster
   
+
