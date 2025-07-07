@@ -6,10 +6,10 @@
   <em>Group 2: abT & T.act cells</em>
 </h1>
 
-## 1. Overview
+# 1. Overview
 
-## 2. Project Description / Introduction
-### **2.1 Immune Cell Types: αβ T Cells & Activated T Cells**
+# 2. Project Description / Introduction
+## **2.1 Immune Cell Types: αβ T Cells & Activated T Cells**
 
 Our project focuses on two related immune cell types: αβ T cells (abT) and their activated counterparts (T.act). The specific cell types analyzed in this project were chosen based on their representation in the cis-regulatory atlas published by Yoshida et al. (2019), which serves as the foundational reference for our immune cell lineage structure.
 <br><br>
@@ -27,6 +27,8 @@ Our project focuses on two related immune cell types: αβ T cells (abT) and the
     <img src="./plots/yoshida_tree_abttact.png" alt="abT and T.act lineage subset" width="100%"/>
     <figcaption><strong>Figure 2.</strong> <em>Highlighted subset of the Yoshida et al. lineage tree, showing only the abT and T.act cell branches analyzed in this project.</em></figcaption>
   </figure>
+
+
 
 </div>
 
@@ -89,14 +91,15 @@ The main idea is combining ATAC-seq and RNA-seq to allow us to reconstruct regul
   <img src="./plots/atac_seq_diagram.png" width="600"/>
 </p>
 
-**Figure 3.** Schematic of ATAC-seq signal logic and components.  
+**Figure 3.** *Schematic of ATAC-seq signal logic and components.*
+<br>
 *Source: Yan, F., et al. (2020). From reads to insight: a hitchhiker’s guide to ATAC-seq data analysis. Genome Biology, 21(22).*
 
 
 
 - Reference datasets and articles (e.g., Yoshida et al., Sasse et al.) - what exactly??? 
 
-### **2.4 Research Goals**
+## **2.4 Research Goals**
 
 **1.** Characterizing the chromatin landscape across immune cell lineages.
 
@@ -109,18 +112,18 @@ The main idea is combining ATAC-seq and RNA-seq to allow us to reconstruct regul
 
 
 
-## 3. Dependencies
+# 3. Dependencies
 
 All dependencies used in this project are listed in the [`environment.yml`](./environment.yml) file.  
 
 
-## 4. Project Organization
+# 4. Project Organization
 The notebooks used in this project can be found in the appendix section. 
 
 
-## 5. Results
+# 5. Results
 
-### **5.0 Initial Signal Assessment**
+## **5.0 Initial Signal Assessment**
 
 We assessed how chromatin signal varies across cell types and whether technical metrics like sequencing depth or number of input cells bias the data. While signal magnitude varied moderately across samples, no major outliers or systematic QC effects were observed. No filtering was applied based on these statistics.
 
@@ -130,64 +133,80 @@ We assessed how chromatin signal varies across cell types and whether technical 
   <img src="plots/persampleCV.png" alt="Signal variability per sample" width="350"/>
 </div>
 
-**Figure 4: Total, median, and variability (CV) of signal across samples.**
+**Figure 4.** *Total, median, and variability (CV) of signal across samples.*
+<br>
+**Notebook: Stats_Across_Peaks**
+
+
 
 Each metric shows consistent global trends with no samples flagged for removal.
 
-**Notebook: Stat\_ATAC / qc\_vs\_signal**
+
+
+
+
+
+
+## **5.1 Filtered Out Genes Based On Variance and Confidence Score**
 
 <img src="./plots/ReadMe/1_Hexbinplot.png" alt="Hexbin plot of signal vs signal" width="400"/>
  
 **Figure 5.** *Variance vs. -log10P for ATAC-seq peaks*  
+**Notebook: ATAC-seq_filtering**
 
-**Notebook**: ATAC_seq_wrangling
+To focus on the most informative CREs, we filtered the ATAC-seq peaks based on two criteria:
 
-### **5.1 Filtered Out Genes Based On Variance and Confidence Score**
+(1) Low variance across cell types since uniformly accessible peaks (e.g., related to housekeeping genes) are less relevant for distinguishing regulatory programs. The cutoff was determined using the median absolute deviation (MAD) of per-peak variance.
 <br>
-With the goal of keeping only the most relevant peaks for our downstream analysis, different metrics concerning the ATAC-seq dataset were analyzed and compared with the help of different plots. The most meaningful method was to filter out peaks with the lowest variance. This ensured that CREs with a similar availability across cell types were dismissed, since they are probably related to, for example, housekeeping genes with a continuous expression throughout a cell’s differentiation process and don’t offer any significant input for our research. For this, variance was calculated per peak across cell type, and the cutoff was based on the median absolute deviation (MAD) of the calculated variance.
-<br>
-Besides that, peaks with a very low confidence score were also filtered out. This score is calculated during peak calling and is related to the enrichment of that sequence against the background. Low confidence peaks might deliver misleading results, hence why they were left out of downstream analysis.
+(2) Low confidence scores, as assigned during peak calling, to exclude weak or potentially artifactual peaks.
 
-### **5.2 TSS Distance Based Characterization of Peaks**
+## **5.2 TSS Distance Based Characterization of Peaks**
 <br>
 Distribution of peak distances and corresponding ATAC signal intensity
 
+<br>
 <img src="./plots/ReadMe/2_TSS_distance.png" alt="Hexbin plot of signal vs signal" width="600"/>
 
 **Figure 6.** *Distribution of peaks by distance to the nearest TSS*  
-Notebook: TSS_distance
+**Notebook: TSS_distance_part1**
 
 <br> We analyzed the genomic distribution of ATAC-seq peaks based on their distance to the nearest transcription start site (TSS). The largest proportion of peaks is found either very close to the TSS (0–500 bp) or far away (>20 kb), with ~28% and ~36% respectively.
 
 <img src="./plots/ReadMe/3_MedianSignal_vs_TSSDistance.png" alt="Median ATAC signal by distance to TSS" width="600"/>
 
 **Figure 7.** *Binned median ATAC signal by distance to TSS*  
-Notebook: TSS_distance 
+**Notebook: TSS_distance_part1**
 
 We also examined how the median ATAC signal varies with distance. Peaks located near the TSS show the highest accessibility signal, which rapidly decreases with increasing distance.
 
-### **5.3 Clustering**<br>
+## **5.3 Clustering**<br>
 As a way of analyzing how the chromatin landscape and gene expression pattern shape cell lines throughout differentiation, we plotted similarity matrices and ran a clustering analysis on our cell types.<br>
 
-#### **5.3.1: Similarity Matrices**
+### **Similarity Matrices**
 
 <img src="image\README\chrom_acc_sim_matrix.png" width="600"/>
 
 **Figure 8.** *Heatmap of pairwise Euclidean distances between genome-wide chromatin accessibility profiles for 29 cell lineages.*
+<br>
+**Notebook: compare_ATAC_RNA**
 
 <img src="image\README\gen_exp_sim_matrix.png" width="600"/>
 
 **Figure 9.** *Heatmap of pairwise Euclidean distances between gene expression profiles for 29 cell lineages.*
+<br>
+**Notebook: compare_ATAC_RNA**
 
 The spearman's rank correlation coefficient between these two matrices is ρ = 0.637 (p = 1.3e-47), which means cell‐pairs that are close in chromatin accessibility tend also to be close in gene expression. 
 
-#### **5.3.2: Dimentionality Reduction and Clustering**
+### **Dimentionality Reduction and Clustering**
 
 We used the elbow method to determine the optimal amount of clusters: k = 5
 
 <img src="image\README\clustering_umap_atac_rna.png" width="600"/>
 
 **Figure 10.** *UMAP of integrated RNA and ATAC data showcasing five distinct cell-type clusters.*
+<br>
+**Notebook: compare_ATAC_RNA**
 
 This clustering subdivided our cells into the following subgroups:
 
@@ -207,11 +226,12 @@ Take cluster 1, for example. It includes all progenitor cells and the two first 
 
 
 
-### **5.4 The Regression Model**
+## **5.4 The Regression Model**
 
 <img src="plots/R2_distr.png" alt="R² distribution" width="500"/>
 
-**Figure 11: Distribution of R² values across genes**
+**Figure 11.** *Distribution of R² values across genes*
+<br>
 **Notebook: regression\_model**
 
 This plot shows how much of the gene expression variance is explained by the CRE signals per gene. A considerable number of genes show low R² (poorly explained), while the rest are fairly evenly distributed, with the median R² around 0.44.
@@ -222,10 +242,11 @@ This plot shows how much of the gene expression variance is explained by the CRE
 
 <img src="plots/single-peak_correlation.png" alt="Single peak correlation vs regression" width="500"/>
 
-**Figure 12: Single-peak correlation vs. multivariate R²**
+**Figure 12.** *Single-peak correlation vs. multivariate R²*
+<br>
 **Notebook: regression\_vs\_correlation**
 
-This plot compares each gene’s maximum absolute Pearson correlation with its multivariate R² from the Lasso model. Most genes follow a general trend—higher max |r| leads to higher R²—but many lie above the r² curve, indicating added predictive power from combining multiple peaks. Others fall below it, where Lasso likely rejected spurious correlations. This highlights the benefit of multivariate modeling beyond simple associations.
+This plot compares each gene’s maximum absolute Pearson correlation with its multivariate R² from the Lasso model. Most genes follow a general trend—higher max |r| leads to higher R²—but many lie above the r² curve, indicating added predictive power from combining multiple peaks. Others fall below it, where Lasso rejected spurious correlations. This highlights the benefit of multivariate modeling beyond simple associations.
 
 
 
@@ -233,7 +254,8 @@ This plot compares each gene’s maximum absolute Pearson correlation with its m
 
 <img src="plots/activators_repressors.png" alt="Effect size vs. distance to TSS" width="500"/>
 
-**Figure 13: Regression coefficients vs. distance to TSS**
+**Figure 13:** *Regression coefficients vs. distance to TSS*
+<br>
 **Notebook: enhancers\_promoters\_regression**
 
 Activators and promoters show positive effects closer to the TSS, while repressors exert negative effects across a broader distance range.
@@ -242,7 +264,7 @@ Activators and promoters show positive effects closer to the TSS, while represso
 
 ### **CRE Distance Summary Statistics**
 
-**Table 1: Summary statistics of CRE distances to TSS**
+**Table 1:** *Summary statistics of CRE distances to TSS* <br>
 **Notebook: enhancers\_promoters\_regression**
 
 | Role      | Count  | Min | 25% | Median | 75%    | Max    |
@@ -259,7 +281,7 @@ Repressing CREs are generally more distal than promoters but more proximal than 
 
 <img src="plots/genes_strongest_CRE.png" alt="Genes by strongest CRE role" width="500"/>
 
-**Figure 14: Genes grouped by dominant CRE role**
+**Figure 14.** *Genes grouped by dominant CRE role* <br>
 **Notebook: enhancers\_promoters\_regression**
 
 Most genes are primarily regulated by activating elements, but a substantial fraction are mainly repressed. A small number are primarily driven by promoter elements, some of which act as repressors.
@@ -303,7 +325,7 @@ We found that **23.8% of genes** (*n* = 1936) have a **promoter coefficient grea
 Intronic and intergenic enhancers show similar overall effect size distributions, with slightly higher median |β| in intronic elements.
 
 
-### **6. Discussion**
+## **6. Discussion**
 
 We combined ATAC-seq and RNA-seq data to explore how cis-regulatory elements (CREs) shape immune cell identity across related immune cell lineages of *Mus musculus*. Our goal was to understand the regulatory logic behind gene expression differences in abT and T.act cells.
 
@@ -338,6 +360,8 @@ Future studies could integrate transcription factor motif analysis or single-cel
 1. Yoshida, H., et al. (2019). The cis-Regulatory Atlas of the Mouse Immune System. Cell, 176(4), 897–912.e20.
 
 2. — Zhang, Y., et al. (2023). *T cell development and differentiation: insights from single-cell transcriptomics.* *Signal Transduction and Targeted Therapy*, **8**, 191. [https://doi.org/10.1038/s41392-023-01471-y](https://doi.org/10.1038/s41392-023-01471-y)
+
+3. Assistance from AI tools was used throughout the project, particularly for code development and refining written formulations.
 
 ## 8. Appendix
 
@@ -381,6 +405,5 @@ gene ontology but im not sure how to explain this
 This notebook explores the relationship between chromatin accessibility at cis-regulatory elements (CREs) and gene expression, with a focus on the distance to the transcription start site (TSS). We included both upstream and downstream regions in the correlation analysis to test how proximity and position relative to the TSS influence the association strength. The goal was to gain insight into spatial trends that might inform further CRE-gene linking strategies.
 
 the rest idk rn 
-### **12. CRE location counts (TBD)**
-### **13. Regression model (TBD)**
-### **4. Regression model (part 2) *about to be pushed* (TBD)**
+
+### **12. Regression model**
